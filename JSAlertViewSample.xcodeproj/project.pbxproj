@@ -1,0 +1,367 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7F00D834158BBB58005975C5 /* JSAlertViewPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F00D833158BBB58005975C5 /* JSAlertViewPresenter.m */; };
+		7F00D83D158BCF2B005975C5 /* JSAlertViewConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F00D83C158BCF2B005975C5 /* JSAlertViewConstants.m */; };
+		7F00D84B158BE4D8005975C5 /* alertView_bgShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F00D843158BE4D8005975C5 /* alertView_bgShadow.png */; };
+		7F00D84C158BE4D8005975C5 /* alertView_bgShadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F00D844158BE4D8005975C5 /* alertView_bgShadow@2x.png */; };
+		7F00D84D158BE4D8005975C5 /* alertView_windowBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F00D845158BE4D8005975C5 /* alertView_windowBG.png */; };
+		7F00D84E158BE4D8005975C5 /* alertView_windowBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F00D846158BE4D8005975C5 /* alertView_windowBG@2x.png */; };
+		7F00D84F158BE4D8005975C5 /* alertView_yellowButton_highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F00D847158BE4D8005975C5 /* alertView_yellowButton_highlighted.png */; };
+		7F00D850158BE4D8005975C5 /* alertView_yellowButton_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F00D848158BE4D8005975C5 /* alertView_yellowButton_highlighted@2x.png */; };
+		7F00D851158BE4D8005975C5 /* alertView_yellowButton_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F00D849158BE4D8005975C5 /* alertView_yellowButton_normal.png */; };
+		7F00D852158BE4D8005975C5 /* alertView_yellowButton_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F00D84A158BE4D8005975C5 /* alertView_yellowButton_normal@2x.png */; };
+		7FAEB8EC158A2538006CC648 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FAEB8EB158A2538006CC648 /* UIKit.framework */; };
+		7FAEB8EE158A2538006CC648 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FAEB8ED158A2538006CC648 /* Foundation.framework */; };
+		7FAEB8F0158A2538006CC648 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FAEB8EF158A2538006CC648 /* CoreGraphics.framework */; };
+		7FAEB8F6158A2538006CC648 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7FAEB8F4158A2538006CC648 /* InfoPlist.strings */; };
+		7FAEB8F8158A2538006CC648 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FAEB8F7158A2538006CC648 /* main.m */; };
+		7FAEB8FC158A2538006CC648 /* JSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FAEB8FB158A2538006CC648 /* JSAppDelegate.m */; };
+		7FAEB8FF158A2538006CC648 /* JSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FAEB8FE158A2538006CC648 /* JSMainViewController.m */; };
+		7FAEB902158A2538006CC648 /* JSFlipsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FAEB901158A2538006CC648 /* JSFlipsideViewController.m */; };
+		7FAEB905158A2538006CC648 /* JSMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7FAEB903158A2538006CC648 /* JSMainViewController.xib */; };
+		7FAEB908158A2538006CC648 /* JSFlipsideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7FAEB906158A2538006CC648 /* JSFlipsideViewController.xib */; };
+		7FAEB910158A2DEE006CC648 /* JSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FAEB90F158A2DEE006CC648 /* JSAlertView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		7F00D832158BBB58005975C5 /* JSAlertViewPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSAlertViewPresenter.h; sourceTree = "<group>"; };
+		7F00D833158BBB58005975C5 /* JSAlertViewPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSAlertViewPresenter.m; sourceTree = "<group>"; };
+		7F00D837158BCB80005975C5 /* JSAlertViewConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSAlertViewConstants.h; sourceTree = "<group>"; };
+		7F00D83C158BCF2B005975C5 /* JSAlertViewConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSAlertViewConstants.m; sourceTree = "<group>"; };
+		7F00D843158BE4D8005975C5 /* alertView_bgShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alertView_bgShadow.png; sourceTree = "<group>"; };
+		7F00D844158BE4D8005975C5 /* alertView_bgShadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alertView_bgShadow@2x.png"; sourceTree = "<group>"; };
+		7F00D845158BE4D8005975C5 /* alertView_windowBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alertView_windowBG.png; sourceTree = "<group>"; };
+		7F00D846158BE4D8005975C5 /* alertView_windowBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alertView_windowBG@2x.png"; sourceTree = "<group>"; };
+		7F00D847158BE4D8005975C5 /* alertView_yellowButton_highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alertView_yellowButton_highlighted.png; sourceTree = "<group>"; };
+		7F00D848158BE4D8005975C5 /* alertView_yellowButton_highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alertView_yellowButton_highlighted@2x.png"; sourceTree = "<group>"; };
+		7F00D849158BE4D8005975C5 /* alertView_yellowButton_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alertView_yellowButton_normal.png; sourceTree = "<group>"; };
+		7F00D84A158BE4D8005975C5 /* alertView_yellowButton_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alertView_yellowButton_normal@2x.png"; sourceTree = "<group>"; };
+		7FAEB8E7158A2538006CC648 /* JSAlertViewSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JSAlertViewSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FAEB8EB158A2538006CC648 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		7FAEB8ED158A2538006CC648 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7FAEB8EF158A2538006CC648 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		7FAEB8F3158A2538006CC648 /* JSAlertViewSample-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JSAlertViewSample-Info.plist"; sourceTree = "<group>"; };
+		7FAEB8F5158A2538006CC648 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7FAEB8F7158A2538006CC648 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7FAEB8F9158A2538006CC648 /* JSAlertViewSample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JSAlertViewSample-Prefix.pch"; sourceTree = "<group>"; };
+		7FAEB8FA158A2538006CC648 /* JSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSAppDelegate.h; sourceTree = "<group>"; };
+		7FAEB8FB158A2538006CC648 /* JSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JSAppDelegate.m; sourceTree = "<group>"; };
+		7FAEB8FD158A2538006CC648 /* JSMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSMainViewController.h; sourceTree = "<group>"; };
+		7FAEB8FE158A2538006CC648 /* JSMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JSMainViewController.m; sourceTree = "<group>"; };
+		7FAEB900158A2538006CC648 /* JSFlipsideViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSFlipsideViewController.h; sourceTree = "<group>"; };
+		7FAEB901158A2538006CC648 /* JSFlipsideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JSFlipsideViewController.m; sourceTree = "<group>"; };
+		7FAEB904158A2538006CC648 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/JSMainViewController.xib; sourceTree = "<group>"; };
+		7FAEB907158A2538006CC648 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/JSFlipsideViewController.xib; sourceTree = "<group>"; };
+		7FAEB90E158A2DEE006CC648 /* JSAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSAlertView.h; sourceTree = "<group>"; };
+		7FAEB90F158A2DEE006CC648 /* JSAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSAlertView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7FAEB8E4158A2538006CC648 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7FAEB8EC158A2538006CC648 /* UIKit.framework in Frameworks */,
+				7FAEB8EE158A2538006CC648 /* Foundation.framework in Frameworks */,
+				7FAEB8F0158A2538006CC648 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7F00D836158BBB60005975C5 /* Import These Files */ = {
+			isa = PBXGroup;
+			children = (
+				7FAEB90E158A2DEE006CC648 /* JSAlertView.h */,
+				7FAEB90F158A2DEE006CC648 /* JSAlertView.m */,
+				7F00D832158BBB58005975C5 /* JSAlertViewPresenter.h */,
+				7F00D833158BBB58005975C5 /* JSAlertViewPresenter.m */,
+				7F00D837158BCB80005975C5 /* JSAlertViewConstants.h */,
+				7F00D83C158BCF2B005975C5 /* JSAlertViewConstants.m */,
+			);
+			name = "Import These Files";
+			sourceTree = "<group>";
+		};
+		7F00D842158BE4D7005975C5 /* Alert View */ = {
+			isa = PBXGroup;
+			children = (
+				7F00D843158BE4D8005975C5 /* alertView_bgShadow.png */,
+				7F00D844158BE4D8005975C5 /* alertView_bgShadow@2x.png */,
+				7F00D845158BE4D8005975C5 /* alertView_windowBG.png */,
+				7F00D846158BE4D8005975C5 /* alertView_windowBG@2x.png */,
+				7F00D847158BE4D8005975C5 /* alertView_yellowButton_highlighted.png */,
+				7F00D848158BE4D8005975C5 /* alertView_yellowButton_highlighted@2x.png */,
+				7F00D849158BE4D8005975C5 /* alertView_yellowButton_normal.png */,
+				7F00D84A158BE4D8005975C5 /* alertView_yellowButton_normal@2x.png */,
+			);
+			path = "Alert View";
+			sourceTree = "<group>";
+		};
+		7FAEB8DC158A2538006CC648 = {
+			isa = PBXGroup;
+			children = (
+				7FAEB8F1158A2538006CC648 /* JSAlertViewSample */,
+				7FAEB8EA158A2538006CC648 /* Frameworks */,
+				7FAEB8E8158A2538006CC648 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7FAEB8E8158A2538006CC648 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7FAEB8E7158A2538006CC648 /* JSAlertViewSample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7FAEB8EA158A2538006CC648 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7FAEB8EB158A2538006CC648 /* UIKit.framework */,
+				7FAEB8ED158A2538006CC648 /* Foundation.framework */,
+				7FAEB8EF158A2538006CC648 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7FAEB8F1158A2538006CC648 /* JSAlertViewSample */ = {
+			isa = PBXGroup;
+			children = (
+				7F00D842158BE4D7005975C5 /* Alert View */,
+				7FAEB8FA158A2538006CC648 /* JSAppDelegate.h */,
+				7FAEB8FB158A2538006CC648 /* JSAppDelegate.m */,
+				7FAEB8FD158A2538006CC648 /* JSMainViewController.h */,
+				7FAEB8FE158A2538006CC648 /* JSMainViewController.m */,
+				7FAEB900158A2538006CC648 /* JSFlipsideViewController.h */,
+				7FAEB901158A2538006CC648 /* JSFlipsideViewController.m */,
+				7FAEB903158A2538006CC648 /* JSMainViewController.xib */,
+				7FAEB906158A2538006CC648 /* JSFlipsideViewController.xib */,
+				7F00D836158BBB60005975C5 /* Import These Files */,
+				7FAEB8F2158A2538006CC648 /* Supporting Files */,
+			);
+			path = JSAlertViewSample;
+			sourceTree = "<group>";
+		};
+		7FAEB8F2158A2538006CC648 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7FAEB8F3158A2538006CC648 /* JSAlertViewSample-Info.plist */,
+				7FAEB8F4158A2538006CC648 /* InfoPlist.strings */,
+				7FAEB8F7158A2538006CC648 /* main.m */,
+				7FAEB8F9158A2538006CC648 /* JSAlertViewSample-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7FAEB8E6158A2538006CC648 /* JSAlertViewSample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7FAEB90B158A2538006CC648 /* Build configuration list for PBXNativeTarget "JSAlertViewSample" */;
+			buildPhases = (
+				7FAEB8E3158A2538006CC648 /* Sources */,
+				7FAEB8E4158A2538006CC648 /* Frameworks */,
+				7FAEB8E5158A2538006CC648 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JSAlertViewSample;
+			productName = JSAlertViewSample;
+			productReference = 7FAEB8E7158A2538006CC648 /* JSAlertViewSample.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7FAEB8DE158A2538006CC648 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = JS;
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = 7FAEB8E1158A2538006CC648 /* Build configuration list for PBXProject "JSAlertViewSample" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7FAEB8DC158A2538006CC648;
+			productRefGroup = 7FAEB8E8158A2538006CC648 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7FAEB8E6158A2538006CC648 /* JSAlertViewSample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7FAEB8E5158A2538006CC648 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7FAEB8F6158A2538006CC648 /* InfoPlist.strings in Resources */,
+				7FAEB905158A2538006CC648 /* JSMainViewController.xib in Resources */,
+				7FAEB908158A2538006CC648 /* JSFlipsideViewController.xib in Resources */,
+				7F00D84B158BE4D8005975C5 /* alertView_bgShadow.png in Resources */,
+				7F00D84C158BE4D8005975C5 /* alertView_bgShadow@2x.png in Resources */,
+				7F00D84D158BE4D8005975C5 /* alertView_windowBG.png in Resources */,
+				7F00D84E158BE4D8005975C5 /* alertView_windowBG@2x.png in Resources */,
+				7F00D84F158BE4D8005975C5 /* alertView_yellowButton_highlighted.png in Resources */,
+				7F00D850158BE4D8005975C5 /* alertView_yellowButton_highlighted@2x.png in Resources */,
+				7F00D851158BE4D8005975C5 /* alertView_yellowButton_normal.png in Resources */,
+				7F00D852158BE4D8005975C5 /* alertView_yellowButton_normal@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7FAEB8E3158A2538006CC648 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7FAEB8F8158A2538006CC648 /* main.m in Sources */,
+				7FAEB8FC158A2538006CC648 /* JSAppDelegate.m in Sources */,
+				7FAEB8FF158A2538006CC648 /* JSMainViewController.m in Sources */,
+				7FAEB902158A2538006CC648 /* JSFlipsideViewController.m in Sources */,
+				7FAEB910158A2DEE006CC648 /* JSAlertView.m in Sources */,
+				7F00D834158BBB58005975C5 /* JSAlertViewPresenter.m in Sources */,
+				7F00D83D158BCF2B005975C5 /* JSAlertViewConstants.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		7FAEB8F4158A2538006CC648 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7FAEB8F5158A2538006CC648 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		7FAEB903158A2538006CC648 /* JSMainViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7FAEB904158A2538006CC648 /* en */,
+			);
+			name = JSMainViewController.xib;
+			sourceTree = "<group>";
+		};
+		7FAEB906158A2538006CC648 /* JSFlipsideViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7FAEB907158A2538006CC648 /* en */,
+			);
+			name = JSFlipsideViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7FAEB909158A2538006CC648 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		7FAEB90A158A2538006CC648 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7FAEB90C158A2538006CC648 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JSAlertViewSample/JSAlertViewSample-Prefix.pch";
+				INFOPLIST_FILE = "JSAlertViewSample/JSAlertViewSample-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		7FAEB90D158A2538006CC648 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JSAlertViewSample/JSAlertViewSample-Prefix.pch";
+				INFOPLIST_FILE = "JSAlertViewSample/JSAlertViewSample-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7FAEB8E1158A2538006CC648 /* Build configuration list for PBXProject "JSAlertViewSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7FAEB909158A2538006CC648 /* Debug */,
+				7FAEB90A158A2538006CC648 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7FAEB90B158A2538006CC648 /* Build configuration list for PBXNativeTarget "JSAlertViewSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7FAEB90C158A2538006CC648 /* Debug */,
+				7FAEB90D158A2538006CC648 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7FAEB8DE158A2538006CC648 /* Project object */;
+}
