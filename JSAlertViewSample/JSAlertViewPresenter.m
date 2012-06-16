@@ -127,7 +127,7 @@
     if (self.alertContainerView == nil) {
         [self prepareAlertContainerView];
     }
-        
+    
     alertView.transform = CGAffineTransformMakeScale(0.05f, 0.05f);
     alertView.alpha = 0.0f;
     alertView.center = CGPointMake(floorf(_alertContainerView.center.x), floorf(_alertContainerView.center.y));
@@ -220,12 +220,15 @@
 
 - (void)prepareWindow {
     self.alertOverlayWindow = [[UIWindow alloc] initWithFrame:[[[UIApplication sharedApplication] keyWindow] frame]];
+    _alertOverlayWindow.windowLevel = UIWindowLevelAlert;
     [self.alertOverlayWindow makeKeyAndVisible];
 }
 
 - (void)prepareBackgroundShadow {
     self.bgShadow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alertView_bgShadow.png"]];
-    _bgShadow.contentMode = UIViewContentModeCenter;
+    _bgShadow.frame = [[UIScreen mainScreen] bounds];
+    _bgShadow.contentMode = UIViewContentModeScaleToFill;
+    _bgShadow.center = _alertOverlayWindow.center;
     _bgShadow.alpha = 0.0f;
     [_alertOverlayWindow addSubview:_bgShadow];
 }

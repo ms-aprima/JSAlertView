@@ -51,19 +51,32 @@
     /*UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Title" 
                                                         message:@"Message body goes here." 
                                                        delegate:nil 
-                                              cancelButtonTitle:@"Okay" 
-                                              otherButtonTitles:nil];
+                                              cancelButtonTitle:@"Cancel" 
+                                              otherButtonTitles:@"One", @"Two", @"Three", nil];
     alertView.delegate = self;
     [alertView show];*/
-    
-    JSAlertView *alertView = [[JSAlertView alloc] initWithTitle:@"Title 0" message:@"Message body goes here" delegate:nil cancelButtonTitle:@"Cancel" acceptButtonTitle:nil];
+
+    JSAlertView *alertView = [[JSAlertView alloc] initWithTitle:@"This is a JSAlertView" 
+                                                        message:@"Your message body goes here. You can customize the appearance using the JSAlertViewPresenter singleton class, passing in images and font appearance parameters." 
+                                                       delegate:nil 
+                                              cancelButtonTitle:@"Okay" 
+                                              otherButtonTitles:@"One", @"Two", nil];
     [alertView show];
-    JSAlertView *alertView1 = [[JSAlertView alloc] initWithTitle:@"Title 1" message:@"Message body goes here" delegate:nil cancelButtonTitle:@"Cancel" acceptButtonTitle:nil];
+    
+    JSAlertView *alertView1 = [[JSAlertView alloc] initWithTitle:@"Stacking Alerts Supported" 
+                                                         message:@"Just like UIAlertView, JSAlertView supports stacked alerts." 
+                                                        delegate:nil 
+                                               cancelButtonTitle:@"I Said Okay" 
+                                              otherButtonTitles:nil];
     [alertView1 show];
-    JSAlertView *alertView2 = [[JSAlertView alloc] initWithTitle:@"Title 2" message:@"Message body goes here" delegate:nil cancelButtonTitle:@"Cancel" acceptButtonTitle:nil];
-    [alertView2 show];
-    JSAlertView *alertView3 = [[JSAlertView alloc] initWithTitle:@"Title 3" message:@"Message body goes here" delegate:nil cancelButtonTitle:@"Cancel" acceptButtonTitle:nil];
-    [alertView3 show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSLog(@"Index %i", buttonIndex);
+}
+
+- (void)alertViewCancel:(UIAlertView *)alertView {
+    NSLog(@"cancel");
 }
 
 - (void)didRotate:(NSNotification *)notification {
