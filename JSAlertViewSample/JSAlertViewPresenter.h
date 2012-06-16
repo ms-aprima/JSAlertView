@@ -33,6 +33,6 @@
 + (JSAlertViewPresenter *)sharedAlertViewPresenter;
 - (void)resetDefaultAppearance;
 - (void)showAlertView:(JSAlertView *)alertView;
-- (void)JS_alertView:(JSAlertView *)sender tappedButtonAtIndex:(NSInteger)index;
+- (void)JS_alertView:(JSAlertView *)sender tappedButtonAtIndex:(NSInteger)index animated:(BOOL)animated;
 
 @end

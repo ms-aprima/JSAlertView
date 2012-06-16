@@ -8,6 +8,7 @@
 
 #import "JSMainViewController.h"
 #import "JSAlertView.h"
+#import "JSAlertViewPresenter.h"
 
 @interface JSMainViewController ()
 
@@ -15,6 +16,7 @@
 @property (strong, nonatomic) UIWindow *overlayWindow;
 @property (strong, nonatomic) UILabel *label;
 @property (assign, nonatomic) UIDeviceOrientation currentOrientation;
+@property (strong, nonatomic) JSAlertView *alertView2;
 
 @end
 
@@ -24,6 +26,7 @@
 @synthesize overlayWindow = _overlayWindow;
 @synthesize label;
 @synthesize currentOrientation;
+@synthesize alertView2;
 
 - (void)viewDidLoad
 {
@@ -40,43 +43,61 @@
     // Release any retained subviews of the main view.
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
 #pragma mark - JSAlertView & Button
 
 - (IBAction)showAlertView:(id)sender {
-    /*UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Title" 
-                                                        message:@"Message body goes here." 
-                                                       delegate:nil 
-                                              cancelButtonTitle:@"Cancel" 
-                                              otherButtonTitles:@"One", @"Two", @"Three", nil];
-    alertView.delegate = self;
-    [alertView show];*/
 
     JSAlertView *alertView = [[JSAlertView alloc] initWithTitle:@"This is a JSAlertView" 
                                                         message:@"Your message body goes here. You can customize the appearance using the JSAlertViewPresenter singleton class, passing in images and font appearance parameters." 
                                                        delegate:nil 
                                               cancelButtonTitle:@"Okay" 
-                                              otherButtonTitles:@"One", @"Two", nil];
+                                              otherButtonTitles:nil];
     [alertView show];
     
     JSAlertView *alertView1 = [[JSAlertView alloc] initWithTitle:@"Stacking Alerts Supported" 
-                                                         message:@"Just like UIAlertView, JSAlertView supports stacked alerts." 
+                                                         message:@"Just like UIAlertView, JSAlertView supports stacked alerts. It also supports multiple buttons, custom images, custom font appearances, and more!" 
                                                         delegate:nil 
-                                               cancelButtonTitle:@"I Said Okay" 
+                                               cancelButtonTitle:@"Continue" 
                                               otherButtonTitles:nil];
     [alertView1 show];
+    
+    self.alertView2 = [[JSAlertView alloc] initWithTitle:@"Multiple Animation Types" 
+                                                         message:@"JSAlertView has different built-in options for dismissal animations:" 
+                                                        delegate:nil 
+                                               cancelButtonTitle:@"Default" 
+                                               otherButtonTitles:@"Falling", @"Shrinking", @"Expanding", nil];
+    self.alertView2.delegate = self;
+    [self.alertView2 show];
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSLog(@"Index %i", buttonIndex);
-}
-
-- (void)alertViewCancel:(UIAlertView *)alertView {
-    NSLog(@"cancel");
+- (void)JS_alertView:(JSAlertView *)alertView tappedButtonAtIndex:(NSInteger)index {
+    if (alertView == self.alertView2) {
+        NSLog(@"index %i", index);
+        switch (index) {
+            case 0:
+                [[JSAlertViewPresenter sharedAlertViewPresenter] setDefaultCancelDismissalStyle:JSAlertViewDismissalStyleFade];
+                [[JSAlertViewPresenter sharedAlertViewPresenter] setDefaultAcceptDismissalStyle:JSAlertViewDismissalStyleFade];
+                break;
+            case 1:
+                [[JSAlertViewPresenter sharedAlertViewPresenter] setDefaultCancelDismissalStyle:JSAlertViewDismissalStyleFall];
+                [[JSAlertViewPresenter sharedAlertViewPresenter] setDefaultAcceptDismissalStyle:JSAlertViewDismissalStyleFall];
+                break;
+            case 2:
+                [[JSAlertViewPresenter sharedAlertViewPresenter] setDefaultCancelDismissalStyle:JSAlertViewDismissalStyleShrink];
+                [[JSAlertViewPresenter sharedAlertViewPresenter] setDefaultAcceptDismissalStyle:JSAlertViewDismissalStyleShrink];
+                break;
+            case 3:
+                [[JSAlertViewPresenter sharedAlertViewPresenter] setDefaultCancelDismissalStyle:JSAlertViewDismissalStyleExpand];
+                [[JSAlertViewPresenter sharedAlertViewPresenter] setDefaultAcceptDismissalStyle:JSAlertViewDismissalStyleExpand];
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 - (void)didRotate:(NSNotification *)notification {

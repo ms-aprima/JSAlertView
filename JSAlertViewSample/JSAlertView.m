@@ -25,6 +25,7 @@
 @property (strong, nonatomic) NSMutableArray *acceptButtonTitles;
 @property (assign, nonatomic) CGSize messageSize;
 @property (assign, nonatomic) CGSize titleSize;
+@property (assign, nonatomic) BOOL isBeingDismissed;
 
 - (void)initialSetup;
 - (void)cancelButtonPressed:(id)sender;
@@ -53,10 +54,12 @@
 @synthesize acceptButtonTitles = _acceptButtonTitles;
 @synthesize messageSize = _messageSize;
 @synthesize titleSize = _titleSize;
+@synthesize numberOfButtons;
+@synthesize isBeingDismissed = _isBeingDismissed;
 
 #define kMaxViewWidth 280.0f
 
-#define kDefaultTitleFontSize 18
+#define kDefaultTitleFontSize 16
 #define kTitleOriginX 10
 #define kTitleOriginY 10
 #define kMaxTitleWidth 260
@@ -95,6 +98,15 @@
     return self;
 }
 
+- (int)numberOfButtons {
+    int count = 0;
+    if (_cancelButton) {
+        count += 1;
+    }
+    count += _acceptButtons.count;
+    return count;
+}
+
 - (void)show {
     [self prepareBackgroundImage];
     [self prepareTitle];
@@ -125,13 +137,29 @@
     [_presenter showAlertView:self];
 }
 
+- (void)dismissWithTappedButtonIndex:(NSInteger)index animated:(BOOL)animated {
+    if (_isBeingDismissed == NO) {
+        _isBeingDismissed = YES;
+        [_presenter JS_alertView:self tappedButtonAtIndex:index animated:animated];
+    }
+}
+
 - (void)cancelButtonPressed:(id)sender {
-    [_presenter JS_alertView:self tappedButtonAtIndex:kCancelButtonIndex];
+    if ([self.delegate respondsToSelector:@selector(JS_alertView:tappedButtonAtIndex:)]) {
+        [self.delegate JS_alertView:self tappedButtonAtIndex:kCancelButtonIndex];
+    }
+    if (_isBeingDismissed == NO) {
+        _isBeingDismissed = YES;
+        [_presenter JS_alertView:self tappedButtonAtIndex:kCancelButtonIndex animated:YES];
+    }
 }
 
 - (void)actionButtonPressed:(id)sender {
     UIButton *acceptButton = (UIButton *)sender;
-    [_presenter JS_alertView:self tappedButtonAtIndex:acceptButton.tag];
+    if ([self.delegate respondsToSelector:@selector(JS_alertView:tappedButtonAtIndex:)]) {
+        [self.delegate JS_alertView:self tappedButtonAtIndex:acceptButton.tag];
+    }
+    [_presenter JS_alertView:self tappedButtonAtIndex:acceptButton.tag animated:YES];
 }
 
 #pragma mark - Convenience

@@ -7,8 +7,9 @@
 //
 
 #import "JSFlipsideViewController.h"
+#import "JSAlertView.h"
 
-@interface JSMainViewController : UIViewController <JSFlipsideViewControllerDelegate, UIAlertViewDelegate>
+@interface JSMainViewController : UIViewController <JSFlipsideViewControllerDelegate, UIAlertViewDelegate, JSAlertViewDelegate>
 
 - (IBAction)showInfo:(id)sender;
 

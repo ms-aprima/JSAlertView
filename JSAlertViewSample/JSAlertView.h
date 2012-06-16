@@ -14,11 +14,16 @@
 @interface JSAlertView : UIView
 
 @property (nonatomic, weak) id <JSAlertViewDelegate> delegate;
+@property (nonatomic, readonly) int numberOfButtons;
 
-- (id)initWithTitle:(NSString *)title message:(NSString *)message delegate:(id /*<JSAlertViewDelegate>*/)delegate cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
-
+- (id)initWithTitle:(NSString *)title 
+            message:(NSString *)message 
+           delegate:(id /*<JSAlertViewDelegate>*/)delegate 
+  cancelButtonTitle:(NSString *)cancelButtonTitle 
+  otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
 
 - (void)show;
+- (void)dismissWithTappedButtonIndex:(NSInteger)index animated:(BOOL)animated;
 
 @end
 
