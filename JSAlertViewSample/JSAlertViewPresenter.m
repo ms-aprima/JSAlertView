@@ -63,17 +63,44 @@
     self = [super init];
     if (self) {
         _alertViews = [NSMutableArray array];
-        _currentOrientation = [[UIDevice currentDevice] orientation];
         [self resetDefaultAppearance];
-        if ([[[[UIApplication sharedApplication] keyWindow] rootViewController] shouldAutorotateToInterfaceOrientation:_currentOrientation] == NO) {
-            if (UIDeviceOrientationIsLandscape(_currentOrientation)) {
-                _currentOrientation = UIDeviceOrientationPortrait;
-            } else {
-                _currentOrientation = UIDeviceOrientationLandscapeRight;
-            }
-        }
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotate:) name:UIDeviceOrientationDidChangeNotification object:nil];
+        [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     }
     return self;
+}
+
+#pragma mark - Rotation
+
+- (void)didRotate:(NSNotification *)notification {
+    UIWindow *mainWindow = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
+    UIViewController *rootVC = mainWindow.rootViewController;
+    UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+    
+    if ([rootVC shouldAutorotateToInterfaceOrientation:orientation] == NO)
+        return;
+    
+    CGFloat duration = 0.3;
+    if ( (UIDeviceOrientationIsLandscape(self.currentOrientation) && UIDeviceOrientationIsLandscape(orientation)) 
+        || (UIDeviceOrientationIsPortrait(orientation) && UIDeviceOrientationIsPortrait(self.currentOrientation)) ) {
+        duration = 0.6;
+    }
+    self.currentOrientation = orientation;
+    [UIView animateWithDuration:duration animations:^{
+        switch (orientation) {
+            case UIDeviceOrientationPortrait:
+                _alertContainerView.transform = CGAffineTransformMakeRotation(0);
+                break;
+            case UIDeviceOrientationLandscapeLeft:
+                _alertContainerView.transform = CGAffineTransformMakeRotation(M_PI / 2);
+                break;
+            case UIDeviceOrientationLandscapeRight:
+                _alertContainerView.transform = CGAffineTransformMakeRotation(M_PI / -2);
+                break; 
+            default:
+                break;
+        }
+    }];
 }
 
 #pragma mark - Show, Hide, Respond
@@ -103,7 +130,7 @@
         
     alertView.transform = CGAffineTransformMakeScale(0.05f, 0.05f);
     alertView.alpha = 0.0f;
-    alertView.center = CGPointMake(160.0f, 240.0f);
+    alertView.center = CGPointMake(floorf(_alertContainerView.center.x), floorf(_alertContainerView.center.y));
     [_alertContainerView addSubview:alertView];
     
     [UIView animateWithDuration:0.2f animations:^{
@@ -204,18 +231,35 @@
 }
 
 - (void)prepareAlertContainerView {
-    CGRect bigSquare = _alertOverlayWindow.bounds;
-    int longestSideLength = bigSquare.size.width > bigSquare.size.height ? bigSquare.size.width : bigSquare.size.height;
-    int xOrigin = _alertOverlayWindow.center.x - longestSideLength / 2;
-    int yOrigin = _alertOverlayWindow.center.y - longestSideLength / 2;
-    bigSquare = CGRectMake(xOrigin, yOrigin, longestSideLength, longestSideLength);
-    self.alertContainerView = [[UIView alloc] initWithFrame:bigSquare];
+    self.alertContainerView = [[UIView alloc] initWithFrame:_alertOverlayWindow.bounds];
+    _alertContainerView.clipsToBounds = NO;
     [_alertOverlayWindow addSubview:_alertContainerView];
+    _currentOrientation = [[UIDevice currentDevice] orientation];
+    if ([[[[UIApplication sharedApplication] keyWindow] rootViewController] shouldAutorotateToInterfaceOrientation:_currentOrientation] == NO) {
+        if (UIDeviceOrientationIsLandscape(_currentOrientation)) {
+            _currentOrientation = _currentOrientation == UIDeviceOrientationLandscapeRight ? UIDeviceOrientationLandscapeRight : UIDeviceOrientationLandscapeLeft;
+        } else {
+            _currentOrientation = _currentOrientation == UIDeviceOrientationPortrait ? UIDeviceOrientationPortrait : UIDeviceOrientationPortraitUpsideDown;
+        }
+    }
+    switch (_currentOrientation) {
+        case UIDeviceOrientationPortrait:
+            _alertContainerView.transform = CGAffineTransformMakeRotation(0);
+            break;
+        case UIDeviceOrientationLandscapeLeft:
+            _alertContainerView.transform = CGAffineTransformMakeRotation(M_PI / 2);
+            break;
+        case UIDeviceOrientationLandscapeRight:
+            _alertContainerView.transform = CGAffineTransformMakeRotation(M_PI / -2);
+            break; 
+        default:
+            break;
+    }
 }
 
 - (void)resetDefaultAppearance {
-    _defaultBackgroundEdgeInsets = UIEdgeInsetsMake(80, 80, 80, 80);
-    _defaultBackgroundImage = [UIImage imageNamed:@"alertView_windowBG.png"];
+    _defaultBackgroundEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
+    _defaultBackgroundImage = [[UIImage imageNamed:@"alertView_windowBG.png"] resizableImageWithCapInsets:_defaultBackgroundEdgeInsets];
 }
 
 @end

@@ -8,6 +8,7 @@
 
 #import "JSAlertView.h"
 #import "JSAlertViewPresenter.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface JSAlertView ()
 
@@ -23,6 +24,7 @@
 @property (strong, nonatomic) NSString *cancelButtonTitle;
 @property (strong, nonatomic) NSString *acceptButtonTitle;
 @property (assign, nonatomic) CGSize messageSize;
+@property (assign, nonatomic) CGSize titleSize;
 
 - (void)initialSetup;
 - (void)cancelButtonPressed:(id)sender;
@@ -50,11 +52,28 @@
 @synthesize cancelButtonTitle = _cancelButtonTitle;
 @synthesize acceptButtonTitle = _acceptButtonTitle;
 @synthesize messageSize = _messageSize;
+@synthesize titleSize = _titleSize;
 
-#define LITTLE_WINDOW_WIDTH 320.0f
-#define LITTLE_WINDOW_HEIGHT 280.0f
-#define CANCEL_BUTTON_WIDTH 258.0f
-#define CANCEL_BUTTON_HEIGHT 56.0f
+#define kMaxViewWidth 280.0f
+
+#define kDefaultTitleFontSize 18
+#define kTitleOriginX 10
+#define kTitleOriginY 10
+#define kMaxTitleWidth 250
+#define kMaxTitleHeight 54
+
+#define kDefaultMessageFontSize 14
+#define kMaxMessageWidth 250.0f
+#define kMaxMessageHeight 250.0f
+#define kMessageOriginX 10
+
+#define kSpacing 10
+
+#define kLeftButtonOriginX 10
+#define kRightButtonOriginX 145
+#define kMinButtonWidth 125
+#define kMaxButtonWidth 250
+#define kButtonHeight 44.0f
 
 - (id)initWithTitle:(NSString *)title message:(NSString *)message delegate:(id)delegate cancelButtonTitle:(NSString *)cancelButtonTitle acceptButtonTitle:(NSString *)acceptButtonTitle {
     self = [super init];
@@ -78,7 +97,15 @@
     }
     [self prepareCancelButton];
     [self prepareActionButton];
-    self.littleWindowBG.frame = CGRectMake(0.0f, 0.0f, LITTLE_WINDOW_WIDTH, 96.0f + _messageSize.height + 28.0f + CANCEL_BUTTON_HEIGHT + 26.0f);
+    CGFloat height = kTitleOriginY + _titleSize.height + kSpacing;
+    if (_messageLabel) {
+        height += _messageSize.height + kSpacing;
+    }
+    height += kButtonHeight + kSpacing;
+    self.frame = CGRectMake(0, 0, kMaxViewWidth, height);
+    UIImageView *dropShadow = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"alertView_dropShadow.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(62, 62, 62, 62)]];
+    dropShadow.frame = CGRectMake(-24.0f, -24.0f, kMaxViewWidth + 48, height + 48);
+    [self insertSubview:dropShadow atIndex:0];
     [_presenter showAlertView:self];
 }
 
@@ -93,59 +120,74 @@
 #pragma mark - Convenience
 
 - (void)initialSetup {
-    self.frame = CGRectMake(0, 0, LITTLE_WINDOW_WIDTH, LITTLE_WINDOW_HEIGHT);
     _presenter = [JSAlertViewPresenter sharedAlertViewPresenter];
+    self.frame = CGRectMake(0, 0, kMaxViewWidth, kMaxViewWidth);
+    self.backgroundColor = [UIColor clearColor];
 }
 
 - (void)prepareBackgroundImage {
-    self.littleWindowBG = [[UIImageView alloc] initWithImage:[_presenter.defaultBackgroundImage resizableImageWithCapInsets:_presenter.defaultBackgroundEdgeInsets]];
-    self.littleWindowBG.userInteractionEnabled = YES;
-    [self addSubview:self.littleWindowBG];
+    self.littleWindowBG = [[UIImageView alloc] initWithImage:_presenter.defaultBackgroundImage];
+    _littleWindowBG.frame = self.frame;
+    _littleWindowBG.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    _littleWindowBG.userInteractionEnabled = YES;
+    _littleWindowBG.layer.cornerRadius = 10.0f;
+    _littleWindowBG.clipsToBounds = YES;
+    [self addSubview:_littleWindowBG];
 }
 
 - (void)prepareTitle {
     self.titleLabel = [[UILabel alloc] init];
-    self.titleLabel.frame = CGRectMake(40.0f, 40.0f, LITTLE_WINDOW_WIDTH - 80.0f, 56.0f);
-    self.titleLabel.textAlignment = UITextAlignmentCenter;
-    self.titleLabel.textColor = [UIColor colorWithWhite:0.18f alpha:1.0f];
-    self.titleLabel.shadowColor = [UIColor colorWithWhite:1.0f alpha:0.8f];
-    self.titleLabel.font = [UIFont boldSystemFontOfSize:16];
-    self.titleLabel.text = _titleText;
-    self.titleLabel.backgroundColor = [UIColor clearColor];
-    self.titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
-    [self.littleWindowBG addSubview:self.titleLabel];
+    self.titleSize = [_titleText sizeWithFont:[UIFont boldSystemFontOfSize:kDefaultTitleFontSize] 
+                            constrainedToSize:CGSizeMake(kMaxTitleWidth, kMaxTitleHeight) 
+                                lineBreakMode:UILineBreakModeMiddleTruncation];
+    _titleLabel.frame = CGRectMake(kTitleOriginX, kTitleOriginY, kMaxTitleWidth, _titleSize.height);
+    _titleLabel.textAlignment = UITextAlignmentCenter;
+    _titleLabel.textColor = [UIColor colorWithWhite:0.18f alpha:1.0f];
+    _titleLabel.shadowColor = [UIColor colorWithWhite:1.0f alpha:0.8f];
+    _titleLabel.font = [UIFont boldSystemFontOfSize:kDefaultTitleFontSize];
+    _titleLabel.text = _titleText;
+    _titleLabel.numberOfLines = 3;
+    _titleLabel.backgroundColor = [UIColor clearColor];
+    _titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    [_littleWindowBG addSubview:_titleLabel];
 }
 
 - (void)prepareMessage {
     self.messageLabel = [[UILabel alloc] init];
-    _messageSize = [_messageText sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(LITTLE_WINDOW_WIDTH - 80.0f, 180.0f) lineBreakMode:UILineBreakModeWordWrap];
-    self.messageLabel.frame = CGRectMake(40.0f, 96.0f, LITTLE_WINDOW_WIDTH - 80.0f, _messageSize.height + 14.0f);
-    self.messageLabel.textAlignment = UITextAlignmentCenter;
-    self.messageLabel.numberOfLines = 1000;
-    self.messageLabel.lineBreakMode = UILineBreakModeWordWrap;
-    self.messageLabel.textColor = [UIColor colorWithWhite:0.15f alpha:1.0f];
-    self.messageLabel.shadowColor = [UIColor colorWithWhite:1.0f alpha:0.5f];
-    self.messageLabel.font = [UIFont systemFontOfSize:14];
-    self.messageLabel.text = _messageText;
-    self.messageLabel.backgroundColor = [UIColor clearColor];
-    self.messageLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
-    [self.littleWindowBG addSubview:self.messageLabel];
+    self.messageSize = [_messageText sizeWithFont:[UIFont boldSystemFontOfSize:kDefaultMessageFontSize] 
+                            constrainedToSize:CGSizeMake(kMaxMessageWidth, kMaxMessageHeight) 
+                                lineBreakMode:UILineBreakModeTailTruncation];
+    _messageLabel.frame = CGRectMake(kMessageOriginX, kTitleOriginY + _titleSize.height + kSpacing, kMaxMessageWidth, _messageSize.height);
+    _messageLabel.textAlignment = UITextAlignmentCenter;
+    _messageLabel.numberOfLines = 3;
+    _messageLabel.lineBreakMode = UILineBreakModeWordWrap;
+    _messageLabel.textColor = [UIColor colorWithWhite:0.15f alpha:1.0f];
+    _messageLabel.shadowColor = [UIColor colorWithWhite:1.0f alpha:0.5f];
+    _messageLabel.font = [UIFont systemFontOfSize:14];
+    _messageLabel.text = _messageText;
+    _messageLabel.backgroundColor = [UIColor clearColor];
+    _messageLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    [_littleWindowBG addSubview:_messageLabel];
 }
 
 - (void)prepareCancelButton {
     self.cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.cancelButton setBackgroundImage:[UIImage imageNamed:@"alertView_yellowButton_normal.png"] forState:UIControlStateNormal];
-    [self.cancelButton setBackgroundImage:[UIImage imageNamed:@"alertView_yellowButton_highlighted.png"] forState:UIControlStateHighlighted];
-    [self.cancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [self.cancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
-    [self.cancelButton setTitleShadowColor:[UIColor yellowColor] forState:UIControlStateNormal];
-    [self.cancelButton setTitleShadowColor:[UIColor clearColor] forState:UIControlStateHighlighted];
-    self.cancelButton.frame = CGRectMake((LITTLE_WINDOW_WIDTH - CANCEL_BUTTON_WIDTH) / 2.0f, self.littleWindowBG.frame.size.height - CANCEL_BUTTON_HEIGHT - 25.0f, CANCEL_BUTTON_WIDTH, CANCEL_BUTTON_HEIGHT);
-    [self.cancelButton setTitle:_cancelButtonTitle forState:UIControlStateNormal];
-    self.cancelButton.titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
-    [self.cancelButton addTarget:self action:@selector(cancelButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    self.cancelButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
-    [self.littleWindowBG addSubview:self.cancelButton];
+    CGFloat yOrigin = kTitleOriginX + _titleSize.height + kSpacing;
+    if (_messageLabel) {
+        yOrigin += _messageSize.height + kSpacing;
+    }
+    _cancelButton.frame = CGRectMake(kLeftButtonOriginX, yOrigin, kMaxButtonWidth, kButtonHeight);
+    [_cancelButton setBackgroundImage:[UIImage imageNamed:@"alertView_yellowButton_normal.png"] forState:UIControlStateNormal];
+    [_cancelButton setBackgroundImage:[UIImage imageNamed:@"alertView_yellowButton_highlighted.png"] forState:UIControlStateHighlighted];
+    [_cancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_cancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+    [_cancelButton setTitleShadowColor:[UIColor yellowColor] forState:UIControlStateNormal];
+    [_cancelButton setTitleShadowColor:[UIColor clearColor] forState:UIControlStateHighlighted];
+    [_cancelButton setTitle:_cancelButtonTitle forState:UIControlStateNormal];
+    _cancelButton.titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    [_cancelButton addTarget:self action:@selector(cancelButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    _cancelButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
+    [_littleWindowBG addSubview:_cancelButton];
 }
 
 - (void)prepareActionButton {
