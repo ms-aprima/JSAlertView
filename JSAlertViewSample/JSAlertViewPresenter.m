@@ -9,6 +9,35 @@
 #import "JSAlertViewPresenter.h"
 #import "JSAlertView.h"
 
+// Usage example:
+// input image: http://f.cl.ly/items/3v0S3w2B3N0p3e0I082d/Image%202011.07.22%2011:29:25%20PM.png
+//
+// UIImage *buttonImage = [UIImage ipMaskedImageNamed:@"UIButtonBarAction.png" color:[UIColor redColor]];
+
+// .h
+@interface UIImage (IPImageUtils)
++ (UIImage *)ipMaskedImageNamed:(NSString *)name color:(UIColor *)color;
+@end
+
+// .m
+@implementation UIImage (IPImageUtils)
+
++ (UIImage *)ipMaskedImageNamed:(NSString *)name color:(UIColor *)color
+{
+	UIImage *image = [UIImage imageNamed:name];
+	CGRect rect = CGRectMake(0, 0, image.size.width, image.size.height);
+	UIGraphicsBeginImageContextWithOptions(rect.size, NO, image.scale);
+	CGContextRef c = UIGraphicsGetCurrentContext();
+	[image drawInRect:rect];
+	CGContextSetFillColorWithColor(c, [color CGColor]);
+	CGContextSetBlendMode(c, kCGBlendModeSourceAtop);
+	CGContextFillRect(c, rect);
+	UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
+	return result;
+}
+
+@end
+
 @interface JSAlertViewPresenter ()
 
 @property (nonatomic, strong) NSMutableArray *alertViews;
@@ -149,7 +178,7 @@
     
     [UIView animateWithDuration:0.2f animations:^{
         alertView.alpha = 1.0f;
-        _bgShadow.alpha = 0.75f;
+        _bgShadow.alpha = 1.0f;
     }];
     
     [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
@@ -322,7 +351,7 @@
 }
 
 - (void)prepareBackgroundShadow {
-    self.bgShadow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alertView_bgShadow.png"]];
+    self.bgShadow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"jsAlertView_shadowOverlay.png"]];
     _bgShadow.frame = [[UIScreen mainScreen] bounds];
     _bgShadow.contentMode = UIViewContentModeScaleToFill;
     _bgShadow.center = _alertOverlayWindow.center;
@@ -362,8 +391,9 @@
 }
 
 - (void)resetDefaultAppearance {
-    _defaultBackgroundEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
-    _defaultBackgroundImage = [[UIImage imageNamed:@"alertView_windowBG.png"] resizableImageWithCapInsets:_defaultBackgroundEdgeInsets];
+    _defaultBackgroundEdgeInsets = UIEdgeInsetsMake(40, 40, 40, 40);
+    UIImage *defaultWithColor = [UIImage ipMaskedImageNamed:@"jsAlertView_defaultBackground_alphaOnly.png" color:[UIColor purpleColor]];
+    _defaultBackgroundImage = [defaultWithColor resizableImageWithCapInsets:_defaultBackgroundEdgeInsets];
     _defaultCancelDismissalStyle = JSAlertViewDismissalStyleFade;
     _defaultAcceptDismissalStyle = JSAlertViewDismissalStyleFade;
 }

@@ -57,27 +57,30 @@
 @synthesize numberOfButtons;
 @synthesize isBeingDismissed = _isBeingDismissed;
 
-#define kMaxViewWidth 280.0f
+#define kMaxViewWidth 284.0f
 
 #define kDefaultTitleFontSize 16
-#define kTitleOriginX 10
+#define kTitleOriginX 14
 #define kTitleSpacingMultiplier 1.5
-#define kMaxTitleWidth 260
+#define kMaxTitleWidth 256
 #define kMaxTitleNumberOfLines 3
 
 #define kDefaultMessageFontSize 14
-#define kMaxMessageWidth 260.0f
+#define kMaxMessageWidth 256.0f
 #define kMaxMessageNumberOfLines 8
-#define kMessageOriginX 10
+#define kMessageOriginX 14
 
 #define kSpacing 10
 #define kAfterMessageSpaceCorrection 4
+#define kSpaceAfterBottomButton 10
 
-#define kLeftButtonOriginX 10
-#define kRightButtonOriginX 145
-#define kMinButtonWidth 125
-#define kMaxButtonWidth 260
+#define kLeftButtonOriginX 14
+#define kRightButtonOriginX 147
+#define kMinButtonWidth 123
+#define kMaxButtonWidth 256
 #define kButtonHeight 44.0f
+
+#define kWidthForDefaultAlphaBG 268
 
 - (id)initWithTitle:(NSString *)title message:(NSString *)message delegate:(id /*<JSAlertViewDelegate>*/)delegate cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)otherButtonTitles, ... {
     self = [super init];
@@ -130,10 +133,11 @@
     } else {
         height += (kButtonHeight + kSpacing) * _acceptButtonTitles.count;
     } 
+    height += kSpaceAfterBottomButton;
     self.frame = CGRectMake(0, 0, kMaxViewWidth, height);
-    UIImageView *dropShadow = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"alertView_dropShadow.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(62, 62, 62, 62)]];
+    /*UIImageView *dropShadow = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"alertView_dropShadow.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(62, 62, 62, 62)]];
     dropShadow.frame = CGRectMake(-24.0f, -24.0f, kMaxViewWidth + 48, height + 48);
-    [self insertSubview:dropShadow atIndex:0];
+    [self insertSubview:dropShadow atIndex:0];*/
     [_presenter showAlertView:self];
 }
 
@@ -175,9 +179,14 @@
     _littleWindowBG.frame = self.frame;
     _littleWindowBG.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     _littleWindowBG.userInteractionEnabled = YES;
-    _littleWindowBG.layer.cornerRadius = 10.0f;
-    _littleWindowBG.clipsToBounds = YES;
+    /*_littleWindowBG.layer.cornerRadius = 10.0f;
+    _littleWindowBG.clipsToBounds = YES;*/
+    UIImageView *overlayBorder = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"jsAlertView_defaultBackground_overlay.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(40, 40, 40, 40)]];
+    overlayBorder.frame = _littleWindowBG.frame;
+    overlayBorder.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    overlayBorder.userInteractionEnabled = NO;
     [self addSubview:_littleWindowBG];
+    [self addSubview:overlayBorder];
 }
 
 - (void)prepareTitle {
@@ -188,13 +197,13 @@
     _titleLabel.frame = CGRectMake(kTitleOriginX, kSpacing * kTitleSpacingMultiplier , kMaxTitleWidth, _titleSize.height);
     _titleLabel.textAlignment = UITextAlignmentCenter;
     _titleLabel.lineBreakMode = UILineBreakModeTailTruncation;
-    _titleLabel.textColor = [UIColor colorWithWhite:0.18f alpha:1.0f];
-    _titleLabel.shadowColor = [UIColor colorWithWhite:1.0f alpha:0.3f];
+    _titleLabel.textColor = [UIColor whiteColor];
+    _titleLabel.shadowColor = [UIColor colorWithWhite:0.0f alpha:0.5f];
     _titleLabel.font = [UIFont boldSystemFontOfSize:kDefaultTitleFontSize];
     _titleLabel.text = _titleText;
     _titleLabel.numberOfLines = kMaxTitleNumberOfLines;
     _titleLabel.backgroundColor = [UIColor clearColor];
-    _titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    _titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
     [_littleWindowBG addSubview:_titleLabel];
 }
 
@@ -206,13 +215,13 @@
     _messageLabel.frame = CGRectMake(kMessageOriginX, kSpacing * kTitleSpacingMultiplier + _titleSize.height + kSpacing, kMaxMessageWidth, _messageSize.height);
     _messageLabel.textAlignment = UITextAlignmentCenter;
     _messageLabel.lineBreakMode = UILineBreakModeTailTruncation;
-    _messageLabel.textColor = [UIColor colorWithWhite:0.15f alpha:1.0f];
-    _messageLabel.shadowColor = [UIColor colorWithWhite:1.0f alpha:0.3f];
+    _messageLabel.textColor = [UIColor whiteColor];
+    _messageLabel.shadowColor = [UIColor colorWithWhite:0.0f alpha:0.5f];
     _messageLabel.font = [UIFont systemFontOfSize:kDefaultMessageFontSize];
     _messageLabel.text = _messageText;
     _messageLabel.numberOfLines = kMaxMessageNumberOfLines;
     _messageLabel.backgroundColor = [UIColor clearColor];
-    _messageLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    _messageLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
     [_littleWindowBG addSubview:_messageLabel];
 }
 
@@ -230,16 +239,21 @@
     } else {
         _cancelButton.frame = CGRectMake(kLeftButtonOriginX, yOrigin, kMaxButtonWidth, kButtonHeight);
     }
-    [_cancelButton setBackgroundImage:[[UIImage imageNamed:@"general_blueButton_normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(2, 10, 1, 10)]
-                             forState:UIControlStateNormal];
-    [_cancelButton setBackgroundImage:[[UIImage imageNamed:@"general_blueButton_highlighted.png"]  resizableImageWithCapInsets:UIEdgeInsetsMake(2, 10, 1, 10)]
-                             forState:UIControlStateHighlighted];
-    [_cancelButton setTitleColor:[UIColor colorWithRed:0.0f green:0.33f blue:0.50f alpha:1.0f] forState:UIControlStateNormal];
-    [_cancelButton setTitleColor:[UIColor colorWithRed:0.0f green:0.33f blue:0.50f alpha:1.0f] forState:UIControlStateHighlighted];
-    [_cancelButton setTitleShadowColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateNormal];
-    [_cancelButton setTitleShadowColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
+    if (_acceptButtonTitles.count > 0) {
+        [_cancelButton setBackgroundImage:[[UIImage imageNamed:@"jsAlertView_cancelButton_normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
+                                 forState:UIControlStateNormal];
+        [_cancelButton setBackgroundImage:[[UIImage imageNamed:@"jsAlertView_cancelButton_highlighted.png"]  resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
+                                 forState:UIControlStateHighlighted];
+    } else {
+        [_cancelButton setBackgroundImage:[[UIImage imageNamed:@"jsAlertView_okayButton_normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
+                                forState:UIControlStateNormal];
+        [_cancelButton setBackgroundImage:[[UIImage imageNamed:@"jsAlertView_okayButton_highlighted.png"]  resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
+                                forState:UIControlStateHighlighted];
+    }
+    [_cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_cancelButton setTitleShadowColor:[UIColor colorWithWhite:0.0f alpha:0.5f] forState:UIControlStateNormal];
     [_cancelButton setTitle:_cancelButtonTitle forState:UIControlStateNormal];
-    _cancelButton.titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    _cancelButton.titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
     [_cancelButton addTarget:self action:@selector(cancelButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     _cancelButton.titleLabel.font = [UIFont boldSystemFontOfSize:kDefaultTitleFontSize];
     [_littleWindowBG addSubview:_cancelButton];
@@ -261,16 +275,14 @@
         } else {
             acceptButton.frame = CGRectMake(kLeftButtonOriginX, yOrigin, kMaxButtonWidth, kButtonHeight);
         }
-        [acceptButton setBackgroundImage:[[UIImage imageNamed:@"general_blueButton_normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(2, 10, 1, 10)]
+        [acceptButton setBackgroundImage:[[UIImage imageNamed:@"jsAlertView_okayButton_normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
                                  forState:UIControlStateNormal];
-        [acceptButton setBackgroundImage:[[UIImage imageNamed:@"general_blueButton_highlighted.png"]  resizableImageWithCapInsets:UIEdgeInsetsMake(2, 10, 1, 10)]
+        [acceptButton setBackgroundImage:[[UIImage imageNamed:@"jsAlertView_okayButton_highlighted.png"]  resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
                                  forState:UIControlStateHighlighted];
-        [acceptButton setTitleColor:[UIColor colorWithRed:0.0f green:0.33f blue:0.50f alpha:1.0f] forState:UIControlStateNormal];
-        [acceptButton setTitleColor:[UIColor colorWithRed:0.0f green:0.33f blue:0.50f alpha:1.0f] forState:UIControlStateHighlighted];
-        [acceptButton setTitleShadowColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateNormal];
-        [acceptButton setTitleShadowColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
+        [acceptButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [acceptButton setTitleShadowColor:[UIColor colorWithWhite:0.0f alpha:0.5f] forState:UIControlStateNormal];
         [acceptButton setTitle:buttonTitle forState:UIControlStateNormal];
-        acceptButton.titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+        acceptButton.titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
         [acceptButton addTarget:self action:@selector(actionButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         acceptButton.titleLabel.font = [UIFont boldSystemFontOfSize:kDefaultTitleFontSize];
         [_littleWindowBG addSubview:acceptButton];
