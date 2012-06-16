@@ -82,9 +82,13 @@
 - (void)didRotate:(NSNotification *)notification {
     UIWindow *mainWindow = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
     UIViewController *rootVC = mainWindow.rootViewController;
+    UIViewController *currentViewController = rootVC;
+    if (rootVC.presentedViewController) {
+        currentViewController = rootVC.presentedViewController;
+    }
     UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
     
-    if ([rootVC shouldAutorotateToInterfaceOrientation:orientation] == NO)
+    if ([currentViewController shouldAutorotateToInterfaceOrientation:orientation] == NO)
         return;
     
     CGFloat duration = 0.3;
@@ -97,6 +101,9 @@
         switch (orientation) {
             case UIDeviceOrientationPortrait:
                 _alertContainerView.transform = CGAffineTransformMakeRotation(0);
+                break;
+            case UIDeviceOrientationPortraitUpsideDown:
+                _alertContainerView.transform = CGAffineTransformMakeRotation(M_PI);
                 break;
             case UIDeviceOrientationLandscapeLeft:
                 _alertContainerView.transform = CGAffineTransformMakeRotation(M_PI / 2);
@@ -257,7 +264,7 @@
 - (void)dismissAlertView:(JSAlertView *)alertView withFallAnimation:(BOOL)animated {
     CGFloat duration = 0.0f;
     if (animated) {
-        duration = 0.33f;
+        duration = 0.3f;
     }
     __weak UIView *blockSafeAlertView = alertView;
     [UIView animateWithDuration:duration delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^{
@@ -294,7 +301,7 @@
 - (void)dismissAlertView:(JSAlertView *)alertView withFadeAnimation:(BOOL)animated {
     CGFloat duration = 0.0f;
     if (animated) {
-        duration = 0.33f;
+        duration = 0.25f;
     }
     [UIView animateWithDuration:duration delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
         alertView.alpha = 0.0f;
@@ -328,7 +335,11 @@
     _alertContainerView.clipsToBounds = NO;
     [_alertOverlayWindow addSubview:_alertContainerView];
     _currentOrientation = [[UIDevice currentDevice] orientation];
-    if ([[[[UIApplication sharedApplication] keyWindow] rootViewController] shouldAutorotateToInterfaceOrientation:_currentOrientation] == NO) {
+    UIViewController *currentViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+    if (currentViewController.presentedViewController) {
+        currentViewController = currentViewController.presentedViewController;
+    }
+    if ([currentViewController shouldAutorotateToInterfaceOrientation:_currentOrientation] == NO) {
         if (UIDeviceOrientationIsLandscape(_currentOrientation)) {
             _currentOrientation = _currentOrientation == UIDeviceOrientationLandscapeRight ? UIDeviceOrientationLandscapeRight : UIDeviceOrientationLandscapeLeft;
         } else {

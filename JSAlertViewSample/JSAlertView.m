@@ -61,7 +61,7 @@
 
 #define kDefaultTitleFontSize 16
 #define kTitleOriginX 10
-#define kTitleOriginY 10
+#define kTitleSpacingMultiplier 1.5
 #define kMaxTitleWidth 260
 #define kMaxTitleNumberOfLines 3
 
@@ -117,7 +117,7 @@
     }
     [self prepareCancelButton];
     [self prepareAcceptButtons];
-    CGFloat height = kTitleOriginY + _titleSize.height + kSpacing;
+    CGFloat height = kSpacing * kTitleSpacingMultiplier + _titleSize.height + kSpacing ;
     if (_messageLabel) {
         height += _messageSize.height + kSpacing;
     }
@@ -185,14 +185,14 @@
     self.titleSize = [_titleText sizeWithFont:[UIFont boldSystemFontOfSize:kDefaultTitleFontSize] 
                             constrainedToSize:CGSizeMake(kMaxTitleWidth, kDefaultTitleFontSize * kMaxTitleNumberOfLines) 
                                 lineBreakMode:UILineBreakModeTailTruncation];
-    _titleLabel.frame = CGRectMake(kTitleOriginX, kTitleOriginY, kMaxTitleWidth, _titleSize.height);
+    _titleLabel.frame = CGRectMake(kTitleOriginX, kSpacing * kTitleSpacingMultiplier , kMaxTitleWidth, _titleSize.height);
     _titleLabel.textAlignment = UITextAlignmentCenter;
     _titleLabel.lineBreakMode = UILineBreakModeTailTruncation;
     _titleLabel.textColor = [UIColor colorWithWhite:0.18f alpha:1.0f];
     _titleLabel.shadowColor = [UIColor colorWithWhite:1.0f alpha:0.3f];
     _titleLabel.font = [UIFont boldSystemFontOfSize:kDefaultTitleFontSize];
     _titleLabel.text = _titleText;
-    _titleLabel.numberOfLines = 3;
+    _titleLabel.numberOfLines = kMaxTitleNumberOfLines;
     _titleLabel.backgroundColor = [UIColor clearColor];
     _titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
     [_littleWindowBG addSubview:_titleLabel];
@@ -203,14 +203,14 @@
     self.messageSize = [_messageText sizeWithFont:[UIFont boldSystemFontOfSize:kDefaultMessageFontSize] 
                             constrainedToSize:CGSizeMake(kMaxMessageWidth, kMaxMessageNumberOfLines * kDefaultMessageFontSize) 
                                 lineBreakMode:UILineBreakModeTailTruncation];
-    _messageLabel.frame = CGRectMake(kMessageOriginX, kTitleOriginY + _titleSize.height + kSpacing, kMaxMessageWidth, _messageSize.height);
+    _messageLabel.frame = CGRectMake(kMessageOriginX, kSpacing * kTitleSpacingMultiplier + _titleSize.height + kSpacing, kMaxMessageWidth, _messageSize.height);
     _messageLabel.textAlignment = UITextAlignmentCenter;
-    _messageLabel.numberOfLines = kMaxMessageNumberOfLines;
     _messageLabel.lineBreakMode = UILineBreakModeTailTruncation;
     _messageLabel.textColor = [UIColor colorWithWhite:0.15f alpha:1.0f];
     _messageLabel.shadowColor = [UIColor colorWithWhite:1.0f alpha:0.3f];
     _messageLabel.font = [UIFont systemFontOfSize:kDefaultMessageFontSize];
     _messageLabel.text = _messageText;
+    _messageLabel.numberOfLines = kMaxMessageNumberOfLines;
     _messageLabel.backgroundColor = [UIColor clearColor];
     _messageLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
     [_littleWindowBG addSubview:_messageLabel];
@@ -218,7 +218,7 @@
 
 - (void)prepareCancelButton {
     self.cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    CGFloat yOrigin = kTitleOriginX + _titleSize.height + kSpacing;
+    CGFloat yOrigin = kSpacing * kTitleSpacingMultiplier + _titleSize.height + kSpacing;
     if (_messageLabel) {
         yOrigin += _messageSize.height + kSpacing;
     }
@@ -249,7 +249,7 @@
     for (int index = 0; index < _acceptButtonTitles.count; index++) {
         NSString *buttonTitle = [_acceptButtonTitles objectAtIndex:index];
         UIButton *acceptButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        CGFloat yOrigin = kTitleOriginX + _titleSize.height + kSpacing;
+        CGFloat yOrigin = kTitleSpacingMultiplier * kSpacing + _titleSize.height + kSpacing;
         if (_messageLabel) {
             yOrigin += _messageSize.height + kSpacing;
         }

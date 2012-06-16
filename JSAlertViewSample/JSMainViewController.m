@@ -59,7 +59,7 @@
     [alertView show];
     
     JSAlertView *alertView1 = [[JSAlertView alloc] initWithTitle:@"Stacking Alerts Supported" 
-                                                         message:@"Just like UIAlertView, JSAlertView supports stacked alerts. It also supports multiple buttons, custom images, custom font appearances, and more!" 
+                                                         message:@"Just like UIAlertView, JSAlertView supports stacked alerts. It also supports multiple buttons, custom images for buttons & the background, custom font appearances, & more!" 
                                                         delegate:nil 
                                                cancelButtonTitle:@"Continue" 
                                               otherButtonTitles:nil];
