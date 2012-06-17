@@ -9,6 +9,55 @@
 #import "JSAlertViewPresenter.h"
 #import "JSAlertView.h"
 
+@interface TSAlertOverlayWindow : UIWindow
+{
+}
+@property (nonatomic,retain) UIWindow* oldKeyWindow;
+@end
+
+@implementation  TSAlertOverlayWindow
+@synthesize oldKeyWindow;
+
+- (void) makeKeyAndVisible
+{
+	self.oldKeyWindow = [[UIApplication sharedApplication] keyWindow];
+	self.windowLevel = UIWindowLevelAlert;
+	[super makeKeyAndVisible];
+}
+
+- (void) resignKeyWindow
+{
+	[super resignKeyWindow];
+	[self.oldKeyWindow makeKeyWindow];
+}
+
+- (void) drawRect: (CGRect) rect
+{
+	// render the radial gradient behind the alertview
+    
+	CGFloat width			= self.frame.size.width;
+	CGFloat height			= self.frame.size.height;
+	CGFloat locations[3]	= { 0.0, 0.5, 1.0 	};
+	CGFloat components[12]	= {	0, 0, 0, 0.1,
+		0, 0, 0, 0.33,
+		0, 0, 0, 0.5	};
+    
+	CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
+	CGGradientRef backgroundGradient = CGGradientCreateWithColorComponents(colorspace, components, locations, 3);
+	CGColorSpaceRelease(colorspace);
+    
+	CGContextDrawRadialGradient(UIGraphicsGetCurrentContext(), 
+								backgroundGradient, 
+								CGPointMake(width/2, height/2), 0,
+								CGPointMake(width/2, height/2), width,
+								0);
+    
+	CGGradientRelease(backgroundGradient);
+}
+
+@end
+
+
 // Usage example:
 // input image: http://f.cl.ly/items/3v0S3w2B3N0p3e0I082d/Image%202011.07.22%2011:29:25%20PM.png
 //
@@ -44,7 +93,7 @@
 @property (nonatomic, strong) JSAlertView *visibleAlertView;
 @property (nonatomic, strong) UIView *alertContainerView;
 @property (nonatomic, assign) UIDeviceOrientation currentOrientation;
-@property (nonatomic, strong) UIWindow *alertOverlayWindow;
+@property (nonatomic, strong) TSAlertOverlayWindow *alertOverlayWindow;
 @property (nonatomic, strong) UIImageView *bgShadow;
 @property (nonatomic, assign) BOOL isAnimating;
 
@@ -179,6 +228,7 @@
     [UIView animateWithDuration:0.2f animations:^{
         alertView.alpha = 1.0f;
         _bgShadow.alpha = 1.0f;
+        _alertOverlayWindow.alpha = 1.0f;
     }];
     
     [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
@@ -205,6 +255,7 @@
 - (void)hideBackgroundShadow {
     [UIView animateWithDuration:0.33f animations:^{
         _bgShadow.alpha = 0.0f;
+        _alertOverlayWindow.alpha = 0.0f;
     } completion:^(BOOL finished) {
         _isAnimating = NO;
         [_bgShadow removeFromSuperview];
@@ -345,13 +396,22 @@
 #pragma mark - Convenience Methods
 
 - (void)prepareWindow {
-    self.alertOverlayWindow = [[UIWindow alloc] initWithFrame:[[[UIApplication sharedApplication] keyWindow] frame]];
+    self.alertOverlayWindow = [[TSAlertOverlayWindow alloc] initWithFrame:[[[UIApplication sharedApplication] keyWindow] frame]];
     _alertOverlayWindow.windowLevel = UIWindowLevelAlert;
+    _alertOverlayWindow.alpha = 0.0f;
+    _alertOverlayWindow.backgroundColor = [UIColor clearColor];
     [self.alertOverlayWindow makeKeyAndVisible];
 }
 
 - (void)prepareBackgroundShadow {
-    self.bgShadow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"jsAlertView_shadowOverlay.png"]];
+    return;
+    UIImage *shadowImage;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        shadowImage = [UIImage imageNamed:@"jsAlertView_gradientShadowOverlay_iPhone.png"];
+    } else if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        shadowImage = [UIImage imageNamed:@"jsAlertView_gradientShadowOverlay_iPad.png"];
+    }
+    self.bgShadow = [[UIImageView alloc] initWithImage:shadowImage];
     _bgShadow.frame = [[UIScreen mainScreen] bounds];
     _bgShadow.contentMode = UIViewContentModeScaleToFill;
     _bgShadow.center = _alertOverlayWindow.center;
@@ -392,7 +452,7 @@
 
 - (void)resetDefaultAppearance {
     _defaultBackgroundEdgeInsets = UIEdgeInsetsMake(40, 40, 40, 40);
-    UIImage *defaultWithColor = [UIImage ipMaskedImageNamed:@"jsAlertView_defaultBackground_alphaOnly.png" color:[UIColor purpleColor]];
+    UIImage *defaultWithColor = [UIImage ipMaskedImageNamed:@"jsAlertView_defaultBackground_alphaOnly.png" color:[UIColor colorWithRed:0.02 green:0.11 blue:0.26 alpha:1.0]];
     _defaultBackgroundImage = [defaultWithColor resizableImageWithCapInsets:_defaultBackgroundEdgeInsets];
     _defaultCancelDismissalStyle = JSAlertViewDismissalStyleFade;
     _defaultAcceptDismissalStyle = JSAlertViewDismissalStyleFade;

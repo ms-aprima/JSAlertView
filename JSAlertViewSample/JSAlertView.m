@@ -240,16 +240,14 @@
         _cancelButton.frame = CGRectMake(kLeftButtonOriginX, yOrigin, kMaxButtonWidth, kButtonHeight);
     }
     if (_acceptButtonTitles.count > 0) {
-        [_cancelButton setBackgroundImage:[[UIImage imageNamed:@"jsAlertView_cancelButton_normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
+        [_cancelButton setBackgroundImage:[[UIImage imageNamed:@"jsAlertView_iOS_cancelButton_normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
                                  forState:UIControlStateNormal];
-        [_cancelButton setBackgroundImage:[[UIImage imageNamed:@"jsAlertView_cancelButton_highlighted.png"]  resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
-                                 forState:UIControlStateHighlighted];
     } else {
-        [_cancelButton setBackgroundImage:[[UIImage imageNamed:@"jsAlertView_okayButton_normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
+        [_cancelButton setBackgroundImage:[[UIImage imageNamed:@"jsAlertView_iOS_okayButton_normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
                                 forState:UIControlStateNormal];
-        [_cancelButton setBackgroundImage:[[UIImage imageNamed:@"jsAlertView_okayButton_highlighted.png"]  resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
-                                forState:UIControlStateHighlighted];
     }
+    [_cancelButton setBackgroundImage:[[UIImage imageNamed:@"jsAlertView_iOS_okayCancelButton_highlighted.png"]  resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
+                             forState:UIControlStateHighlighted];
     [_cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_cancelButton setTitleShadowColor:[UIColor colorWithWhite:0.0f alpha:0.5f] forState:UIControlStateNormal];
     [_cancelButton setTitle:_cancelButtonTitle forState:UIControlStateNormal];
@@ -275,9 +273,9 @@
         } else {
             acceptButton.frame = CGRectMake(kLeftButtonOriginX, yOrigin, kMaxButtonWidth, kButtonHeight);
         }
-        [acceptButton setBackgroundImage:[[UIImage imageNamed:@"jsAlertView_okayButton_normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
+        [acceptButton setBackgroundImage:[[UIImage imageNamed:@"jsAlertView_iOS_okayButton_normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
                                  forState:UIControlStateNormal];
-        [acceptButton setBackgroundImage:[[UIImage imageNamed:@"jsAlertView_okayButton_highlighted.png"]  resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
+        [acceptButton setBackgroundImage:[[UIImage imageNamed:@"jsAlertView_iOS_okayCancelButton_highlighted.png"]  resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
                                  forState:UIControlStateHighlighted];
         [acceptButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [acceptButton setTitleShadowColor:[UIColor colorWithWhite:0.0f alpha:0.5f] forState:UIControlStateNormal];

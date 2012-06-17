@@ -23,22 +23,16 @@
 		7F01B017158C1314006B09CC /* general_blueButton_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F01B013158C1314006B09CC /* general_blueButton_highlighted@2x.png */; };
 		7F01B018158C1314006B09CC /* general_blueButton_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F01B014158C1314006B09CC /* general_blueButton_normal.png */; };
 		7F01B019158C1314006B09CC /* general_blueButton_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F01B015158C1314006B09CC /* general_blueButton_normal@2x.png */; };
-		7F01B087158D0870006B09CC /* jsAlertView_cancelButton_highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F01B077158D0870006B09CC /* jsAlertView_cancelButton_highlighted.png */; };
-		7F01B088158D0870006B09CC /* jsAlertView_cancelButton_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F01B078158D0870006B09CC /* jsAlertView_cancelButton_highlighted@2x.png */; };
-		7F01B089158D0870006B09CC /* jsAlertView_cancelButton_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F01B079158D0870006B09CC /* jsAlertView_cancelButton_normal.png */; };
-		7F01B08A158D0870006B09CC /* jsAlertView_cancelButton_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F01B07A158D0870006B09CC /* jsAlertView_cancelButton_normal@2x.png */; };
 		7F01B08B158D0870006B09CC /* jsAlertView_defaultBackground_alphaOnly.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F01B07B158D0870006B09CC /* jsAlertView_defaultBackground_alphaOnly.png */; };
 		7F01B08C158D0870006B09CC /* jsAlertView_defaultBackground_alphaOnly@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F01B07C158D0870006B09CC /* jsAlertView_defaultBackground_alphaOnly@2x.png */; };
 		7F01B08D158D0870006B09CC /* jsAlertView_defaultBackground_overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F01B07D158D0870006B09CC /* jsAlertView_defaultBackground_overlay.png */; };
 		7F01B08E158D0870006B09CC /* jsAlertView_defaultBackground_overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F01B07E158D0870006B09CC /* jsAlertView_defaultBackground_overlay@2x.png */; };
-		7F01B08F158D0870006B09CC /* jsAlertView_okayButton_highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F01B07F158D0870006B09CC /* jsAlertView_okayButton_highlighted.png */; };
-		7F01B090158D0870006B09CC /* jsAlertView_okayButton_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F01B080158D0870006B09CC /* jsAlertView_okayButton_highlighted@2x.png */; };
-		7F01B091158D0870006B09CC /* jsAlertView_okayButton_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F01B081158D0870006B09CC /* jsAlertView_okayButton_normal.png */; };
-		7F01B092158D0870006B09CC /* jsAlertView_okayButton_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F01B082158D0870006B09CC /* jsAlertView_okayButton_normal@2x.png */; };
-		7F01B093158D0870006B09CC /* jsAlertView_shadowOverlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F01B083158D0870006B09CC /* jsAlertView_shadowOverlay.png */; };
-		7F01B094158D0870006B09CC /* jsAlertView_shadowOverlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F01B084158D0870006B09CC /* jsAlertView_shadowOverlay@2x.png */; };
-		7F01B095158D0870006B09CC /* jsAlertView_shadowOverlay_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F01B085158D0870006B09CC /* jsAlertView_shadowOverlay_iPad.png */; };
-		7F01B096158D0870006B09CC /* jsAlertView_shadowOverlay_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F01B086158D0870006B09CC /* jsAlertView_shadowOverlay_iPad@2x.png */; };
+		7F39F69D158E36F400AD24B4 /* jsAlertView_iOS_cancelButton_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F39F693158E36F400AD24B4 /* jsAlertView_iOS_cancelButton_normal.png */; };
+		7F39F69E158E36F400AD24B4 /* jsAlertView_iOS_cancelButton_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F39F694158E36F400AD24B4 /* jsAlertView_iOS_cancelButton_normal@2x.png */; };
+		7F39F69F158E36F400AD24B4 /* jsAlertView_iOS_okayButton_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F39F695158E36F400AD24B4 /* jsAlertView_iOS_okayButton_normal.png */; };
+		7F39F6A0158E36F400AD24B4 /* jsAlertView_iOS_okayButton_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F39F696158E36F400AD24B4 /* jsAlertView_iOS_okayButton_normal@2x.png */; };
+		7F39F6A1158E36F400AD24B4 /* jsAlertView_iOS_okayCancelButton_highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F39F697158E36F400AD24B4 /* jsAlertView_iOS_okayCancelButton_highlighted.png */; };
+		7F39F6A2158E36F400AD24B4 /* jsAlertView_iOS_okayCancelButton_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F39F698158E36F400AD24B4 /* jsAlertView_iOS_okayCancelButton_highlighted@2x.png */; };
 		7FAEB8EC158A2538006CC648 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FAEB8EB158A2538006CC648 /* UIKit.framework */; };
 		7FAEB8EE158A2538006CC648 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FAEB8ED158A2538006CC648 /* Foundation.framework */; };
 		7FAEB8F0158A2538006CC648 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FAEB8EF158A2538006CC648 /* CoreGraphics.framework */; };
@@ -71,22 +65,16 @@
 		7F01B013158C1314006B09CC /* general_blueButton_highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "general_blueButton_highlighted@2x.png"; sourceTree = "<group>"; };
 		7F01B014158C1314006B09CC /* general_blueButton_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = general_blueButton_normal.png; sourceTree = "<group>"; };
 		7F01B015158C1314006B09CC /* general_blueButton_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "general_blueButton_normal@2x.png"; sourceTree = "<group>"; };
-		7F01B077158D0870006B09CC /* jsAlertView_cancelButton_highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jsAlertView_cancelButton_highlighted.png; sourceTree = "<group>"; };
-		7F01B078158D0870006B09CC /* jsAlertView_cancelButton_highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jsAlertView_cancelButton_highlighted@2x.png"; sourceTree = "<group>"; };
-		7F01B079158D0870006B09CC /* jsAlertView_cancelButton_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jsAlertView_cancelButton_normal.png; sourceTree = "<group>"; };
-		7F01B07A158D0870006B09CC /* jsAlertView_cancelButton_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jsAlertView_cancelButton_normal@2x.png"; sourceTree = "<group>"; };
 		7F01B07B158D0870006B09CC /* jsAlertView_defaultBackground_alphaOnly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jsAlertView_defaultBackground_alphaOnly.png; sourceTree = "<group>"; };
 		7F01B07C158D0870006B09CC /* jsAlertView_defaultBackground_alphaOnly@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jsAlertView_defaultBackground_alphaOnly@2x.png"; sourceTree = "<group>"; };
 		7F01B07D158D0870006B09CC /* jsAlertView_defaultBackground_overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jsAlertView_defaultBackground_overlay.png; sourceTree = "<group>"; };
 		7F01B07E158D0870006B09CC /* jsAlertView_defaultBackground_overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jsAlertView_defaultBackground_overlay@2x.png"; sourceTree = "<group>"; };
-		7F01B07F158D0870006B09CC /* jsAlertView_okayButton_highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jsAlertView_okayButton_highlighted.png; sourceTree = "<group>"; };
-		7F01B080158D0870006B09CC /* jsAlertView_okayButton_highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jsAlertView_okayButton_highlighted@2x.png"; sourceTree = "<group>"; };
-		7F01B081158D0870006B09CC /* jsAlertView_okayButton_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jsAlertView_okayButton_normal.png; sourceTree = "<group>"; };
-		7F01B082158D0870006B09CC /* jsAlertView_okayButton_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jsAlertView_okayButton_normal@2x.png"; sourceTree = "<group>"; };
-		7F01B083158D0870006B09CC /* jsAlertView_shadowOverlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jsAlertView_shadowOverlay.png; sourceTree = "<group>"; };
-		7F01B084158D0870006B09CC /* jsAlertView_shadowOverlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jsAlertView_shadowOverlay@2x.png"; sourceTree = "<group>"; };
-		7F01B085158D0870006B09CC /* jsAlertView_shadowOverlay_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jsAlertView_shadowOverlay_iPad.png; sourceTree = "<group>"; };
-		7F01B086158D0870006B09CC /* jsAlertView_shadowOverlay_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jsAlertView_shadowOverlay_iPad@2x.png"; sourceTree = "<group>"; };
+		7F39F693158E36F400AD24B4 /* jsAlertView_iOS_cancelButton_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jsAlertView_iOS_cancelButton_normal.png; sourceTree = "<group>"; };
+		7F39F694158E36F400AD24B4 /* jsAlertView_iOS_cancelButton_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jsAlertView_iOS_cancelButton_normal@2x.png"; sourceTree = "<group>"; };
+		7F39F695158E36F400AD24B4 /* jsAlertView_iOS_okayButton_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jsAlertView_iOS_okayButton_normal.png; sourceTree = "<group>"; };
+		7F39F696158E36F400AD24B4 /* jsAlertView_iOS_okayButton_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jsAlertView_iOS_okayButton_normal@2x.png"; sourceTree = "<group>"; };
+		7F39F697158E36F400AD24B4 /* jsAlertView_iOS_okayCancelButton_highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jsAlertView_iOS_okayCancelButton_highlighted.png; sourceTree = "<group>"; };
+		7F39F698158E36F400AD24B4 /* jsAlertView_iOS_okayCancelButton_highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jsAlertView_iOS_okayCancelButton_highlighted@2x.png"; sourceTree = "<group>"; };
 		7FAEB8E7158A2538006CC648 /* JSAlertViewSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JSAlertViewSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FAEB8EB158A2538006CC648 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7FAEB8ED158A2538006CC648 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -159,22 +147,16 @@
 		7F01B076158D0870006B09CC /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				7F01B077158D0870006B09CC /* jsAlertView_cancelButton_highlighted.png */,
-				7F01B078158D0870006B09CC /* jsAlertView_cancelButton_highlighted@2x.png */,
-				7F01B079158D0870006B09CC /* jsAlertView_cancelButton_normal.png */,
-				7F01B07A158D0870006B09CC /* jsAlertView_cancelButton_normal@2x.png */,
+				7F39F693158E36F400AD24B4 /* jsAlertView_iOS_cancelButton_normal.png */,
+				7F39F694158E36F400AD24B4 /* jsAlertView_iOS_cancelButton_normal@2x.png */,
+				7F39F695158E36F400AD24B4 /* jsAlertView_iOS_okayButton_normal.png */,
+				7F39F696158E36F400AD24B4 /* jsAlertView_iOS_okayButton_normal@2x.png */,
+				7F39F697158E36F400AD24B4 /* jsAlertView_iOS_okayCancelButton_highlighted.png */,
+				7F39F698158E36F400AD24B4 /* jsAlertView_iOS_okayCancelButton_highlighted@2x.png */,
 				7F01B07B158D0870006B09CC /* jsAlertView_defaultBackground_alphaOnly.png */,
 				7F01B07C158D0870006B09CC /* jsAlertView_defaultBackground_alphaOnly@2x.png */,
 				7F01B07D158D0870006B09CC /* jsAlertView_defaultBackground_overlay.png */,
 				7F01B07E158D0870006B09CC /* jsAlertView_defaultBackground_overlay@2x.png */,
-				7F01B07F158D0870006B09CC /* jsAlertView_okayButton_highlighted.png */,
-				7F01B080158D0870006B09CC /* jsAlertView_okayButton_highlighted@2x.png */,
-				7F01B081158D0870006B09CC /* jsAlertView_okayButton_normal.png */,
-				7F01B082158D0870006B09CC /* jsAlertView_okayButton_normal@2x.png */,
-				7F01B083158D0870006B09CC /* jsAlertView_shadowOverlay.png */,
-				7F01B084158D0870006B09CC /* jsAlertView_shadowOverlay@2x.png */,
-				7F01B085158D0870006B09CC /* jsAlertView_shadowOverlay_iPad.png */,
-				7F01B086158D0870006B09CC /* jsAlertView_shadowOverlay_iPad@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -303,22 +285,16 @@
 				7F01B017158C1314006B09CC /* general_blueButton_highlighted@2x.png in Resources */,
 				7F01B018158C1314006B09CC /* general_blueButton_normal.png in Resources */,
 				7F01B019158C1314006B09CC /* general_blueButton_normal@2x.png in Resources */,
-				7F01B087158D0870006B09CC /* jsAlertView_cancelButton_highlighted.png in Resources */,
-				7F01B088158D0870006B09CC /* jsAlertView_cancelButton_highlighted@2x.png in Resources */,
-				7F01B089158D0870006B09CC /* jsAlertView_cancelButton_normal.png in Resources */,
-				7F01B08A158D0870006B09CC /* jsAlertView_cancelButton_normal@2x.png in Resources */,
 				7F01B08B158D0870006B09CC /* jsAlertView_defaultBackground_alphaOnly.png in Resources */,
 				7F01B08C158D0870006B09CC /* jsAlertView_defaultBackground_alphaOnly@2x.png in Resources */,
 				7F01B08D158D0870006B09CC /* jsAlertView_defaultBackground_overlay.png in Resources */,
 				7F01B08E158D0870006B09CC /* jsAlertView_defaultBackground_overlay@2x.png in Resources */,
-				7F01B08F158D0870006B09CC /* jsAlertView_okayButton_highlighted.png in Resources */,
-				7F01B090158D0870006B09CC /* jsAlertView_okayButton_highlighted@2x.png in Resources */,
-				7F01B091158D0870006B09CC /* jsAlertView_okayButton_normal.png in Resources */,
-				7F01B092158D0870006B09CC /* jsAlertView_okayButton_normal@2x.png in Resources */,
-				7F01B093158D0870006B09CC /* jsAlertView_shadowOverlay.png in Resources */,
-				7F01B094158D0870006B09CC /* jsAlertView_shadowOverlay@2x.png in Resources */,
-				7F01B095158D0870006B09CC /* jsAlertView_shadowOverlay_iPad.png in Resources */,
-				7F01B096158D0870006B09CC /* jsAlertView_shadowOverlay_iPad@2x.png in Resources */,
+				7F39F69D158E36F400AD24B4 /* jsAlertView_iOS_cancelButton_normal.png in Resources */,
+				7F39F69E158E36F400AD24B4 /* jsAlertView_iOS_cancelButton_normal@2x.png in Resources */,
+				7F39F69F158E36F400AD24B4 /* jsAlertView_iOS_okayButton_normal.png in Resources */,
+				7F39F6A0158E36F400AD24B4 /* jsAlertView_iOS_okayButton_normal@2x.png in Resources */,
+				7F39F6A1158E36F400AD24B4 /* jsAlertView_iOS_okayCancelButton_highlighted.png in Resources */,
+				7F39F6A2158E36F400AD24B4 /* jsAlertView_iOS_okayCancelButton_highlighted@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
