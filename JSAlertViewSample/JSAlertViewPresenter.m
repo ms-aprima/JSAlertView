@@ -8,6 +8,9 @@
 
 #import "JSAlertViewPresenter.h"
 #import "JSAlertView.h"
+#import <QuartzCore/QuartzCore.h>
+
+// https://github.com/TomSwift/TSAlertView/blob/master/TSAlertView/TSAlertView.m
 
 @interface TSAlertOverlayWindow : UIWindow
 {
@@ -34,7 +37,7 @@
 - (void) drawRect: (CGRect) rect
 {
 	// render the radial gradient behind the alertview
-    
+    self.layer.contentsScale = 2.0;
 	CGFloat width			= self.frame.size.width;
 	CGFloat height			= self.frame.size.height;
 	CGFloat locations[3]	= { 0.0, 0.5, 1.0 	};
@@ -452,7 +455,7 @@
 
 - (void)resetDefaultAppearance {
     _defaultBackgroundEdgeInsets = UIEdgeInsetsMake(40, 40, 40, 40);
-    UIImage *defaultWithColor = [UIImage ipMaskedImageNamed:@"jsAlertView_defaultBackground_alphaOnly.png" color:[UIColor colorWithRed:0.02 green:0.11 blue:0.26 alpha:1.0]];
+    UIImage *defaultWithColor = [UIImage ipMaskedImageNamed:@"jsAlertView_defaultBackground_alphaOnly.png" color:[UIColor colorWithRed:0.3 green:0.0 blue:0.3 alpha:1.0]];
     _defaultBackgroundImage = [defaultWithColor resizableImageWithCapInsets:_defaultBackgroundEdgeInsets];
     _defaultCancelDismissalStyle = JSAlertViewDismissalStyleFade;
     _defaultAcceptDismissalStyle = JSAlertViewDismissalStyleFade;
