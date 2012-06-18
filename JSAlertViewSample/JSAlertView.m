@@ -59,25 +59,29 @@
 
 #define kMaxViewWidth 284.0f
 
-#define kDefaultTitleFontSize 16
-#define kTitleOriginX 14
+#define kDefaultTitleFontSize 18
+#define kTitleOriginX 20
+#define kTitleLeadingTop 19
+#define kTitleLeadingBottom 10
 #define kTitleSpacingMultiplier 1.5
-#define kMaxTitleWidth 256
+#define kMaxTitleWidth 244
 #define kMaxTitleNumberOfLines 3
 
-#define kDefaultMessageFontSize 14
+#define kDefaultMessageFontSize 16
 #define kMaxMessageWidth 256.0f
 #define kMaxMessageNumberOfLines 8
 #define kMessageOriginX 14
 
-#define kSpacing 10
-#define kAfterMessageSpaceCorrection 4
-#define kSpaceAfterBottomButton 10
+#define kSpacing 7
+#define kSpaceAboveTopButton 7
+#define kSpaceAfterOneOfSeveralActionButtons 6
+#define kSpaceAboveSeparatedCancelButton 7
+#define kSpaceAfterBottomButton 15
 
-#define kLeftButtonOriginX 14
-#define kRightButtonOriginX 147
-#define kMinButtonWidth 123
-#define kMaxButtonWidth 256
+#define kLeftButtonOriginX 11
+#define kRightButtonOriginX 146
+#define kMinButtonWidth 127
+#define kMaxButtonWidth 262
 #define kButtonHeight 44.0f
 
 #define kWidthForDefaultAlphaBG 268
@@ -92,7 +96,9 @@
         va_list args;
         va_start(args, otherButtonTitles);
         for (NSString *arg = otherButtonTitles; arg != nil; arg = va_arg(args, NSString*)) {
-            [_acceptButtonTitles addObject:arg];
+            if (arg.length > 0) {
+                [_acceptButtonTitles addObject:arg];
+            }
         }
         va_end(args);
         _acceptButtons = [NSMutableArray array];
@@ -118,22 +124,23 @@
     } else {
         _messageSize = CGSizeZero;
     }
-    [self prepareCancelButton];
+    if (_cancelButtonTitle && _cancelButtonTitle.length > 0) {
+        [self prepareCancelButton];
+    }
     [self prepareAcceptButtons];
-    CGFloat height = kSpacing * kTitleSpacingMultiplier + _titleSize.height + kSpacing ;
+    CGFloat height = kTitleLeadingTop + _titleSize.height + kTitleLeadingBottom ;
     if (_messageLabel) {
         height += _messageSize.height + kSpacing;
     }
+    height += kSpaceAboveTopButton;
     if (_cancelButton) {
-        height += kButtonHeight + kSpacing;
+        height += kButtonHeight + kSpaceAfterBottomButton;
         if (_acceptButtons.count > 1) {
-            height += kSpacing;
-            height += (kButtonHeight + kSpacing) * _acceptButtonTitles.count;
+            height += (kButtonHeight + kSpaceAfterOneOfSeveralActionButtons) * _acceptButtonTitles.count + kSpaceAboveSeparatedCancelButton + kSpacing;
         }
     } else {
-        height += (kButtonHeight + kSpacing) * _acceptButtonTitles.count;
+        height += (kButtonHeight + kSpaceAfterOneOfSeveralActionButtons) * _acceptButtonTitles.count - kSpaceAfterOneOfSeveralActionButtons + kSpaceAfterBottomButton;
     } 
-    height += kSpaceAfterBottomButton;
     self.frame = CGRectMake(0, 0, kMaxViewWidth, height);
     /*UIImageView *dropShadow = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"alertView_dropShadow.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(62, 62, 62, 62)]];
     dropShadow.frame = CGRectMake(-24.0f, -24.0f, kMaxViewWidth + 48, height + 48);
@@ -194,7 +201,7 @@
     self.titleSize = [_titleText sizeWithFont:[UIFont boldSystemFontOfSize:kDefaultTitleFontSize] 
                             constrainedToSize:CGSizeMake(kMaxTitleWidth, kDefaultTitleFontSize * kMaxTitleNumberOfLines) 
                                 lineBreakMode:UILineBreakModeTailTruncation];
-    _titleLabel.frame = CGRectMake(kTitleOriginX, kSpacing * kTitleSpacingMultiplier , kMaxTitleWidth, _titleSize.height);
+    _titleLabel.frame = CGRectMake(kTitleOriginX, kTitleLeadingTop, kMaxTitleWidth, _titleSize.height);
     _titleLabel.textAlignment = UITextAlignmentCenter;
     _titleLabel.lineBreakMode = UILineBreakModeTailTruncation;
     _titleLabel.textColor = [UIColor whiteColor];
@@ -212,7 +219,7 @@
     self.messageSize = [_messageText sizeWithFont:[UIFont boldSystemFontOfSize:kDefaultMessageFontSize] 
                             constrainedToSize:CGSizeMake(kMaxMessageWidth, kMaxMessageNumberOfLines * kDefaultMessageFontSize) 
                                 lineBreakMode:UILineBreakModeTailTruncation];
-    _messageLabel.frame = CGRectMake(kMessageOriginX, kSpacing * kTitleSpacingMultiplier + _titleSize.height + kSpacing, kMaxMessageWidth, _messageSize.height);
+    _messageLabel.frame = CGRectMake(kMessageOriginX, kTitleLeadingTop + _titleSize.height + kTitleLeadingBottom, kMaxMessageWidth, _messageSize.height);
     _messageLabel.textAlignment = UITextAlignmentCenter;
     _messageLabel.lineBreakMode = UILineBreakModeTailTruncation;
     _messageLabel.textColor = [UIColor whiteColor];
@@ -227,12 +234,13 @@
 
 - (void)prepareCancelButton {
     self.cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    CGFloat yOrigin = kSpacing * kTitleSpacingMultiplier + _titleSize.height + kSpacing;
+    CGFloat yOrigin = kTitleLeadingTop + _titleSize.height + kTitleLeadingBottom;
     if (_messageLabel) {
         yOrigin += _messageSize.height + kSpacing;
     }
+    yOrigin += kSpaceAboveTopButton;
     if (_acceptButtonTitles.count > 1) {
-        yOrigin += (kButtonHeight + kSpacing) * _acceptButtonTitles.count + kSpacing;
+        yOrigin += (kButtonHeight + kSpaceAfterOneOfSeveralActionButtons) * _acceptButtonTitles.count + kSpacing + kSpaceAboveSeparatedCancelButton;
         _cancelButton.frame = CGRectMake(kLeftButtonOriginX, yOrigin, kMaxButtonWidth, kButtonHeight);
     } else if (_acceptButtonTitles.count == 1) {
         _cancelButton.frame = CGRectMake(kLeftButtonOriginX, yOrigin, kMinButtonWidth, kButtonHeight);
@@ -261,12 +269,13 @@
     for (int index = 0; index < _acceptButtonTitles.count; index++) {
         NSString *buttonTitle = [_acceptButtonTitles objectAtIndex:index];
         UIButton *acceptButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        CGFloat yOrigin = kTitleSpacingMultiplier * kSpacing + _titleSize.height + kSpacing;
+        CGFloat yOrigin = kTitleLeadingTop + _titleSize.height + kTitleLeadingBottom;
         if (_messageLabel) {
             yOrigin += _messageSize.height + kSpacing;
         }
+        yOrigin += kSpaceAboveTopButton;
         if (_acceptButtonTitles.count > 1) {
-            yOrigin += (kButtonHeight + kSpacing) * index;
+            yOrigin += (kButtonHeight + kSpaceAfterOneOfSeveralActionButtons) * index;
             acceptButton.frame = CGRectMake(kLeftButtonOriginX, yOrigin, kMaxButtonWidth, kButtonHeight);
         } else if (_cancelButtonTitle) {
             acceptButton.frame = CGRectMake(kRightButtonOriginX, yOrigin, kMinButtonWidth, kButtonHeight);

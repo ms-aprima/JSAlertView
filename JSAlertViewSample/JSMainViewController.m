@@ -51,15 +51,15 @@
 
 - (IBAction)showAlertView:(id)sender {
 
-    JSAlertView *alertView = [[JSAlertView alloc] initWithTitle:@"This is a JSAlertView" 
-                                                        message:@"Your message body goes here. You can customize the appearance using the JSAlertViewPresenter singleton class, passing in images and font appearance parameters." 
+    JSAlertView *alertView = [[JSAlertView alloc] initWithTitle:@"Turn Off Airplane Mode" 
+                                                        message:@"Just like UIAlertView, JSAlertView supports stacked alerts. It also supports."
                                                        delegate:nil 
-                                              cancelButtonTitle:@"Okay" 
-                                              otherButtonTitles:nil];
+                                              cancelButtonTitle:nil 
+                                              otherButtonTitles:@"Rate This App", @"Never Ask Again", nil];
     [alertView show];
     
     JSAlertView *alertView1 = [[JSAlertView alloc] initWithTitle:@"Stacking Alerts Supported" 
-                                                         message:@"Just like UIAlertView, JSAlertView supports stacked alerts. It also supports multiple buttons, custom images for buttons & the background, custom font appearances, & more!" 
+                                                         message:@"Just like UIAlertView, JSAlertView supports stacked alerts."
                                                         delegate:nil 
                                                cancelButtonTitle:@"Continue" 
                                               otherButtonTitles:nil];

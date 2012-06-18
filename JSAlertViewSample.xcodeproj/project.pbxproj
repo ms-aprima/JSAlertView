@@ -44,6 +44,10 @@
 		7FAEB905158A2538006CC648 /* JSMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7FAEB903158A2538006CC648 /* JSMainViewController.xib */; };
 		7FAEB908158A2538006CC648 /* JSFlipsideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7FAEB906158A2538006CC648 /* JSFlipsideViewController.xib */; };
 		7FAEB910158A2DEE006CC648 /* JSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FAEB90F158A2DEE006CC648 /* JSAlertView.m */; };
+		7FD48576158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FD48572158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPad.png */; };
+		7FD48577158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FD48573158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPad@2x.png */; };
+		7FD48578158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FD48574158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPhone.png */; };
+		7FD48579158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FD48575158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPhone@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +97,10 @@
 		7FAEB907158A2538006CC648 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/JSFlipsideViewController.xib; sourceTree = "<group>"; };
 		7FAEB90E158A2DEE006CC648 /* JSAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSAlertView.h; sourceTree = "<group>"; };
 		7FAEB90F158A2DEE006CC648 /* JSAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSAlertView.m; sourceTree = "<group>"; };
+		7FD48572158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jsAlertView_gradientShadowOverlay_iPad.png; sourceTree = "<group>"; };
+		7FD48573158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jsAlertView_gradientShadowOverlay_iPad@2x.png"; sourceTree = "<group>"; };
+		7FD48574158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jsAlertView_gradientShadowOverlay_iPhone.png; sourceTree = "<group>"; };
+		7FD48575158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jsAlertView_gradientShadowOverlay_iPhone@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +155,10 @@
 		7F01B076158D0870006B09CC /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7FD48572158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPad.png */,
+				7FD48573158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPad@2x.png */,
+				7FD48574158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPhone.png */,
+				7FD48575158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPhone@2x.png */,
 				7F39F693158E36F400AD24B4 /* jsAlertView_iOS_cancelButton_normal.png */,
 				7F39F694158E36F400AD24B4 /* jsAlertView_iOS_cancelButton_normal@2x.png */,
 				7F39F695158E36F400AD24B4 /* jsAlertView_iOS_okayButton_normal.png */,
@@ -295,6 +307,10 @@
 				7F39F6A0158E36F400AD24B4 /* jsAlertView_iOS_okayButton_normal@2x.png in Resources */,
 				7F39F6A1158E36F400AD24B4 /* jsAlertView_iOS_okayCancelButton_highlighted.png in Resources */,
 				7F39F6A2158E36F400AD24B4 /* jsAlertView_iOS_okayCancelButton_highlighted@2x.png in Resources */,
+				7FD48576158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPad.png in Resources */,
+				7FD48577158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPad@2x.png in Resources */,
+				7FD48578158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPhone.png in Resources */,
+				7FD48579158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPhone@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

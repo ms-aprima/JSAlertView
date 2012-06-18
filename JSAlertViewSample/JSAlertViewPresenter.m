@@ -96,7 +96,7 @@
 @property (nonatomic, strong) JSAlertView *visibleAlertView;
 @property (nonatomic, strong) UIView *alertContainerView;
 @property (nonatomic, assign) UIDeviceOrientation currentOrientation;
-@property (nonatomic, strong) TSAlertOverlayWindow *alertOverlayWindow;
+@property (nonatomic, strong) UIWindow *alertOverlayWindow;
 @property (nonatomic, strong) UIImageView *bgShadow;
 @property (nonatomic, assign) BOOL isAnimating;
 
@@ -231,7 +231,6 @@
     [UIView animateWithDuration:0.2f animations:^{
         alertView.alpha = 1.0f;
         _bgShadow.alpha = 1.0f;
-        _alertOverlayWindow.alpha = 1.0f;
     }];
     
     [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
@@ -258,7 +257,6 @@
 - (void)hideBackgroundShadow {
     [UIView animateWithDuration:0.33f animations:^{
         _bgShadow.alpha = 0.0f;
-        _alertOverlayWindow.alpha = 0.0f;
     } completion:^(BOOL finished) {
         _isAnimating = NO;
         [_bgShadow removeFromSuperview];
@@ -399,15 +397,13 @@
 #pragma mark - Convenience Methods
 
 - (void)prepareWindow {
-    self.alertOverlayWindow = [[TSAlertOverlayWindow alloc] initWithFrame:[[[UIApplication sharedApplication] keyWindow] frame]];
+    self.alertOverlayWindow = [[UIWindow alloc] initWithFrame:[[[UIApplication sharedApplication] keyWindow] frame]];
     _alertOverlayWindow.windowLevel = UIWindowLevelAlert;
-    _alertOverlayWindow.alpha = 0.0f;
     _alertOverlayWindow.backgroundColor = [UIColor clearColor];
     [self.alertOverlayWindow makeKeyAndVisible];
 }
 
 - (void)prepareBackgroundShadow {
-    return;
     UIImage *shadowImage;
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         shadowImage = [UIImage imageNamed:@"jsAlertView_gradientShadowOverlay_iPhone.png"];
