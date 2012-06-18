@@ -54,8 +54,8 @@
     JSAlertView *alertView = [[JSAlertView alloc] initWithTitle:@"Turn Off Airplane Mode" 
                                                         message:@"Just like UIAlertView, JSAlertView supports stacked alerts. It also supports."
                                                        delegate:nil 
-                                              cancelButtonTitle:nil 
-                                              otherButtonTitles:@"Rate This App", @"Never Ask Again", nil];
+                                              cancelButtonTitle:@"Cancel" 
+                                              otherButtonTitles:@"Rate This App", nil];
     [alertView show];
     
     JSAlertView *alertView1 = [[JSAlertView alloc] initWithTitle:@"Stacking Alerts Supported" 

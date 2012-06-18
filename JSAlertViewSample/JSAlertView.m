@@ -247,7 +247,7 @@
 
 - (void)prepareMessage {
     self.messageLabel = [[UILabel alloc] init];
-    self.messageSize = [_messageText sizeWithFont:[UIFont boldSystemFontOfSize:kDefaultMessageFontSize] 
+    self.messageSize = [_messageText sizeWithFont:[UIFont systemFontOfSize:kDefaultMessageFontSize] 
                             constrainedToSize:CGSizeMake(kMaxMessageWidth, kMaxMessageNumberOfLines * kDefaultMessageFontSize) 
                                 lineBreakMode:UILineBreakModeTailTruncation];
     _messageLabel.frame = CGRectMake(kMessageOriginX, kTitleLeadingTop + _titleSize.height + kTitleLeadingBottom, kMaxMessageWidth, _messageSize.height);
