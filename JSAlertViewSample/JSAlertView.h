@@ -26,9 +26,9 @@ typedef enum {
 @property (nonatomic, assign) JSAlertViewDismissalStyle cancelButtonDismissalStyle;
 @property (nonatomic, assign) JSAlertViewDismissalStyle acceptButtonDismissalStyle;
 
-+ (void)setDefaultAcceptButtonDismissalAnimationStyle:(JSAlertViewDismissalStyle)style;
-+ (void)setDefaultCancelButtonDismissalAnimationStyle:(JSAlertViewDismissalStyle)style;
-+ (void)setDefaultTintColor:(UIColor *)tint;
++ (void)setGlobalAcceptButtonDismissalAnimationStyle:(JSAlertViewDismissalStyle)style;
++ (void)setGlobalCancelButtonDismissalAnimationStyle:(JSAlertViewDismissalStyle)style;
++ (void)setGlobalTintColor:(UIColor *)tint;
 + (void)resetDefaults;
 
 - (id)initWithTitle:(NSString *)title message:(NSString *)message delegate:(id /*<JSAlertViewDelegate>*/)delegate cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;

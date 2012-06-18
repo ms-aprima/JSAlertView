@@ -260,6 +260,7 @@
             [self dismissAlertView:alertView withExpandAnimation:animated atButtonIndex:index];
             break;
         case JSAlertViewDismissalStyleFade:
+        case JSAlertViewDismissalStyleDefault:
             [self dismissAlertView:alertView withFadeAnimation:animated atButtonIndex:index];
             break;
         default:
@@ -282,6 +283,7 @@
             [self dismissAlertView:alertView withExpandAnimation:animated atButtonIndex:index];
             break;
         case JSAlertViewDismissalStyleFade:
+        case JSAlertViewDismissalStyleDefault:
             [self dismissAlertView:alertView withFadeAnimation:animated atButtonIndex:index];
             break;
         default:
@@ -738,15 +740,18 @@
     return _defaultBackgroundImage;
 }
 
-+ (void)setDefaultAcceptButtonDismissalAnimationStyle:(JSAlertViewDismissalStyle)style {
++ (void)setGlobalAcceptButtonDismissalAnimationStyle:(JSAlertViewDismissalStyle)style {
     [[JSAlertViewPresenter sharedAlertViewPresenter] setDefaultAcceptDismissalStyle:style];
 }
 
-+ (void)setDefaultCancelButtonDismissalAnimationStyle:(JSAlertViewDismissalStyle)style {
++ (void)setGlobalCancelButtonDismissalAnimationStyle:(JSAlertViewDismissalStyle)style {
     [[JSAlertViewPresenter sharedAlertViewPresenter] setDefaultCancelDismissalStyle:style];
 }
 
-+ (void)setDefaultTintColor:(UIColor *)tint {
++ (void)setGlobalTintColor:(UIColor *)tint {
+    if (tint == nil) {
+        tint = [UIColor colorWithRed:0.02f green:0.06f blue:0.25f alpha:1.0f]; 
+    }
     [[JSAlertViewPresenter sharedAlertViewPresenter] setDefaultColor:tint];
 }
 

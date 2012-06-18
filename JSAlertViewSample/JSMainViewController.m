@@ -107,20 +107,20 @@
     if (alertView == self.animationAlertView) {
         switch (index) {
             case 0:
-                [JSAlertView setDefaultAcceptButtonDismissalAnimationStyle:JSAlertViewDismissalStyleFade];
-                [JSAlertView setDefaultCancelButtonDismissalAnimationStyle:JSAlertViewDismissalStyleFade];
+                [JSAlertView setGlobalAcceptButtonDismissalAnimationStyle:JSAlertViewDismissalStyleDefault];
+                [JSAlertView setGlobalCancelButtonDismissalAnimationStyle:JSAlertViewDismissalStyleDefault];
                 break;
             case 1:
-                [JSAlertView setDefaultAcceptButtonDismissalAnimationStyle:JSAlertViewDismissalStyleFall];
-                [JSAlertView setDefaultCancelButtonDismissalAnimationStyle:JSAlertViewDismissalStyleFall];
+                [JSAlertView setGlobalAcceptButtonDismissalAnimationStyle:JSAlertViewDismissalStyleFall];
+                [JSAlertView setGlobalCancelButtonDismissalAnimationStyle:JSAlertViewDismissalStyleFall];
                 break;
             case 2:
-                [JSAlertView setDefaultAcceptButtonDismissalAnimationStyle:JSAlertViewDismissalStyleShrink];
-                [JSAlertView setDefaultCancelButtonDismissalAnimationStyle:JSAlertViewDismissalStyleShrink];
+                [JSAlertView setGlobalAcceptButtonDismissalAnimationStyle:JSAlertViewDismissalStyleShrink];
+                [JSAlertView setGlobalCancelButtonDismissalAnimationStyle:JSAlertViewDismissalStyleShrink];
                 break;
             case 3:
-                [JSAlertView setDefaultAcceptButtonDismissalAnimationStyle:JSAlertViewDismissalStyleExpand];
-                [JSAlertView setDefaultCancelButtonDismissalAnimationStyle:JSAlertViewDismissalStyleExpand];
+                [JSAlertView setGlobalAcceptButtonDismissalAnimationStyle:JSAlertViewDismissalStyleExpand];
+                [JSAlertView setGlobalCancelButtonDismissalAnimationStyle:JSAlertViewDismissalStyleExpand];
                 break;
             default:
                 break;
