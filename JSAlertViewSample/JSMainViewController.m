@@ -55,13 +55,14 @@
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    return YES;
 }
 
 #pragma mark - JSAlertView & Button
 
 
 - (IBAction)buttonPressedDefault:(id)sender {
+    [JSAlertView resetDefaults];
     JSAlertView *alertView = [[JSAlertView alloc] initWithTitle:@"Mimic iOS Default" 
                                                         message:@"It's easy to mimic the appearance of a vanilla UIAlertView with JSAlertView." 
                                                        delegate:nil 
@@ -94,7 +95,7 @@
                                                        delegate:nil 
                                               cancelButtonTitle:nil 
                                               otherButtonTitles: @"Okay", nil];
-    alertView.tintColor = [UIColor colorWithRed:0.0 green:0.33 blue:0.0 alpha:1.0];
+    alertView.tintColor = [UIColor colorWithRed:0.0 green:0.66 blue:0.0 alpha:1.0];
     [alertView show];
 }
 - (IBAction)buttonPressedGrey:(id)sender {

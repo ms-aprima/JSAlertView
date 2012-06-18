@@ -76,6 +76,7 @@
 - (void)presentAlertView:(JSAlertView *)alertView;
 - (void)showNextAlertView;
 - (void)dismissWindow;
+- (void)updateViewForOrientation:(UIDeviceOrientation)orientation animated:(BOOL)animated;
 
 @end
 
@@ -125,13 +126,22 @@
     }
     UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
     
-    if ([currentViewController shouldAutorotateToInterfaceOrientation:orientation] == NO)
-        return;
-    
-    CGFloat duration = 0.3;
-    if ( (UIDeviceOrientationIsLandscape(self.currentOrientation) && UIDeviceOrientationIsLandscape(orientation)) 
-        || (UIDeviceOrientationIsPortrait(orientation) && UIDeviceOrientationIsPortrait(self.currentOrientation)) ) {
-        duration = 0.6;
+    if ([currentViewController shouldAutorotateToInterfaceOrientation:orientation]) {    
+        [self updateViewForOrientation:orientation animated:YES];
+    }
+}
+
+- (void)updateViewForOrientation:(UIDeviceOrientation)orientation animated:(BOOL)animated {
+    CGFloat duration = 0.0f;
+    if (animated) {
+        duration = 0.3;
+        if ( (UIDeviceOrientationIsLandscape(self.currentOrientation) && UIDeviceOrientationIsLandscape(orientation)) 
+            || (UIDeviceOrientationIsPortrait(orientation) && UIDeviceOrientationIsPortrait(self.currentOrientation)) ) {
+            duration = 0.6;
+        }
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+            duration = duration * 1.3;
+        }
     }
     self.currentOrientation = orientation;
     [UIView animateWithDuration:duration animations:^{
@@ -152,6 +162,7 @@
                 break;
         }
     }];
+
 }
 
 #pragma mark - Show, Hide, Respond
@@ -404,6 +415,9 @@
     if (currentViewController.presentedViewController) {
         currentViewController = currentViewController.presentedViewController;
     }
+    if (_currentOrientation == UIDeviceOrientationUnknown) {
+        _currentOrientation = [[UIApplication sharedApplication] statusBarOrientation];;
+    }
     if ([currentViewController shouldAutorotateToInterfaceOrientation:_currentOrientation] == NO) {
         if (UIDeviceOrientationIsLandscape(_currentOrientation)) {
             _currentOrientation = _currentOrientation == UIDeviceOrientationLandscapeRight ? UIDeviceOrientationLandscapeRight : UIDeviceOrientationLandscapeLeft;
@@ -411,19 +425,7 @@
             _currentOrientation = _currentOrientation == UIDeviceOrientationPortrait ? UIDeviceOrientationPortrait : UIDeviceOrientationPortraitUpsideDown;
         }
     }
-    switch (_currentOrientation) {
-        case UIDeviceOrientationPortrait:
-            _alertContainerView.transform = CGAffineTransformMakeRotation(0);
-            break;
-        case UIDeviceOrientationLandscapeLeft:
-            _alertContainerView.transform = CGAffineTransformMakeRotation(M_PI / 2);
-            break;
-        case UIDeviceOrientationLandscapeRight:
-            _alertContainerView.transform = CGAffineTransformMakeRotation(M_PI / -2);
-            break; 
-        default:
-            break;
-    }
+    [self updateViewForOrientation:_currentOrientation animated:NO];
 }
 
 - (void)resetDefaultAppearance {
