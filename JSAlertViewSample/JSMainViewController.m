@@ -6,6 +6,10 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+// Uses the IPImageUtils UIImage category by omz:
+// LINK: https://gist.github.com/1102091/b196c1ec001d1a69b9940f0f32043d62d5f596d4
+//
+
 #import "JSMainViewController.h"
 #import "JSAlertView.h"
 
