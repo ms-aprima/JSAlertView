@@ -3,6 +3,7 @@ by Jared Sinclair  -  http://www.jaredsinclair.com
 
 
 
+
 What is JSAlertView?
 ====================
 
@@ -11,9 +12,19 @@ JSAlertView is an easily-customizable, drop-in replacement for UIAlertView in yo
 
 
 UIAlertView — vs — JSAlertView
-========================
+==============================
 
 Implementing JSAlertView is almost exactly the same as UIAlertView. For the most part, you should only have to change the "UI" class prefix to "JS" to make the change. There is a delegate protocol called JSAlertViewDelegate which shares the same structure and behavior as UIAlertView, with one exception: JSAlertView will never be auto-dismissed in response to application state changes (background, incoming call, etc.). JSAlertView *is* automatically dismissed by tapping any of its buttons, however.
+
+
+
+Image Resources
+===============
+
+JSAlertView requires 14 image files to render properly on all screens. These are included in the JSAlertViewSample.app project above. 
+
+The total size of all 14 images is 1.3mb. Images for iPhone and iPad at both standard and retina resolution are included. There is an important reason why some of these images are large: the background radial shadow that overlays the window is pre-rendered in Photoshop to avoid the ugly banding that appears when drawing them in code. If you can find a way to draw these gradients programmatically without banding, please let me know @jaredsinclar! As it stands, the image for the retina iPad weighs in at over 700kb by itself. Remove this image if you don't need it to save lots of space.
+
 
 
 
@@ -75,6 +86,7 @@ License Agreement
 =================
 
 Check the end of this doc for the license agreement. But you can use, modify, or share this pretty much as you see fit. Just include attribution in your credits!
+
 
 
 
