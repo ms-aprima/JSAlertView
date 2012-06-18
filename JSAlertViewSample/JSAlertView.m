@@ -10,6 +10,35 @@
 #import "JSAlertViewPresenter.h"
 #import <QuartzCore/QuartzCore.h>
 
+// Usage example:
+// input image: http://f.cl.ly/items/3v0S3w2B3N0p3e0I082d/Image%202011.07.22%2011:29:25%20PM.png
+//
+// UIImage *buttonImage = [UIImage ipMaskedImageNamed:@"UIButtonBarAction.png" color:[UIColor redColor]];
+
+// .h
+@interface UIImage (IPImageUtils)
++ (UIImage *)ipMaskedImageNamed:(NSString *)name color:(UIColor *)color;
+@end
+
+// .m
+@implementation UIImage (IPImageUtils)
+
++ (UIImage *)ipMaskedImageNamed:(NSString *)name color:(UIColor *)color
+{
+	UIImage *image = [UIImage imageNamed:name];
+	CGRect rect = CGRectMake(0, 0, image.size.width, image.size.height);
+	UIGraphicsBeginImageContextWithOptions(rect.size, NO, image.scale);
+	CGContextRef c = UIGraphicsGetCurrentContext();
+	[image drawInRect:rect];
+	CGContextSetFillColorWithColor(c, [color CGColor]);
+	CGContextSetBlendMode(c, kCGBlendModeSourceAtop);
+	CGContextFillRect(c, rect);
+	UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
+	return result;
+}
+
+@end
+
 @interface JSAlertView ()
 
 @property (weak, nonatomic) JSAlertViewPresenter *presenter;
@@ -35,6 +64,7 @@
 - (void)prepareMessage;
 - (void)prepareCancelButton;
 - (void)prepareAcceptButtons;
+- (UIImage *)defaultBackgroundImage;
 
 @end
 
@@ -56,6 +86,9 @@
 @synthesize titleSize = _titleSize;
 @synthesize numberOfButtons;
 @synthesize isBeingDismissed = _isBeingDismissed;
+@synthesize tintColor = _tintColor;
+@synthesize cancelButtonDismissalStyle = _cancelButtonDismissalStyle;
+@synthesize acceptButtonDismissalStyle = _acceptButtonDismissalStyle;
 
 #define kMaxViewWidth 284.0f
 
@@ -182,12 +215,10 @@
 }
 
 - (void)prepareBackgroundImage {
-    self.littleWindowBG = [[UIImageView alloc] initWithImage:_presenter.defaultBackgroundImage];
+    self.littleWindowBG = [[UIImageView alloc] initWithImage:[self defaultBackgroundImage]];
     _littleWindowBG.frame = self.frame;
     _littleWindowBG.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     _littleWindowBG.userInteractionEnabled = YES;
-    /*_littleWindowBG.layer.cornerRadius = 10.0f;
-    _littleWindowBG.clipsToBounds = YES;*/
     UIImageView *overlayBorder = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"jsAlertView_defaultBackground_overlay.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(40, 40, 40, 40)]];
     overlayBorder.frame = _littleWindowBG.frame;
     overlayBorder.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -296,6 +327,32 @@
         acceptButton.tag = index + 1;
         [_acceptButtons addObject:acceptButton];
     }
+}
+
+- (UIImage *)defaultBackgroundImage {
+    UIEdgeInsets _defaultBackgroundEdgeInsets = UIEdgeInsetsMake(40, 40, 40, 40);
+    if (self.tintColor == nil) {
+        self.tintColor = [[JSAlertViewPresenter sharedAlertViewPresenter] defaultColor];
+    }
+    UIImage *defaultImageWithColor = [UIImage ipMaskedImageNamed:@"jsAlertView_defaultBackground_alphaOnly.png" color:self.tintColor];
+    UIImage *_defaultBackgroundImage = [defaultImageWithColor resizableImageWithCapInsets:_defaultBackgroundEdgeInsets];
+    return _defaultBackgroundImage;
+}
+
++ (void)setDefaultAcceptButtonDismissalAnimationStyle:(JSAlertViewDismissalStyle)style {
+    [[JSAlertViewPresenter sharedAlertViewPresenter] setDefaultAcceptDismissalStyle:style];
+}
+
++ (void)setDefaultCancelButtonDismissalAnimationStyle:(JSAlertViewDismissalStyle)style {
+    [[JSAlertViewPresenter sharedAlertViewPresenter] setDefaultCancelDismissalStyle:style];
+}
+
++ (void)setDefaultTintColor:(UIColor *)tint {
+    [[JSAlertViewPresenter sharedAlertViewPresenter] setDefaultColor:tint];
+}
+
++ (void)resetDefaults {
+    [[JSAlertViewPresenter sharedAlertViewPresenter] resetDefaultAppearance];
 }
 
 @end

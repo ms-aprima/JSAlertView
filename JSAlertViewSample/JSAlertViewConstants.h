@@ -7,6 +7,7 @@
 //
 
 typedef enum {
+    JSAlertViewDismissalStyleDefault, // Defaults to the global settings set by JSAlertViewPresenter
     JSAlertViewDismissalStyleShrink, 
     JSAlertViewDismissalStyleFall, // Like Tweetbot
     JSAlertViewDismissalStyleExpand, // Like Reeder
@@ -14,4 +15,3 @@ typedef enum {
 } JSAlertViewDismissalStyle;
 
 #define kCancelButtonIndex 0
-#define kAcceptButtonIndex 1

@@ -15,6 +15,9 @@
 
 @property (nonatomic, weak) id <JSAlertViewDelegate> delegate;
 @property (nonatomic, readonly) int numberOfButtons;
+@property (nonatomic, strong) UIColor *tintColor;
+@property (nonatomic, assign) JSAlertViewDismissalStyle cancelButtonDismissalStyle;
+@property (nonatomic, assign) JSAlertViewDismissalStyle acceptButtonDismissalStyle;
 
 - (id)initWithTitle:(NSString *)title 
             message:(NSString *)message 
@@ -24,6 +27,10 @@
 
 - (void)show;
 - (void)dismissWithTappedButtonIndex:(NSInteger)index animated:(BOOL)animated;
++ (void)setDefaultAcceptButtonDismissalAnimationStyle:(JSAlertViewDismissalStyle)style;
++ (void)setDefaultCancelButtonDismissalAnimationStyle:(JSAlertViewDismissalStyle)style;
++ (void)setDefaultTintColor:(UIColor *)tint;
++ (void)resetDefaults;
 
 @end
 

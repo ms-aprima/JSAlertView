@@ -10,86 +10,6 @@
 #import "JSAlertView.h"
 #import <QuartzCore/QuartzCore.h>
 
-// https://github.com/TomSwift/TSAlertView/blob/master/TSAlertView/TSAlertView.m
-
-@interface TSAlertOverlayWindow : UIWindow
-{
-}
-@property (nonatomic,retain) UIWindow* oldKeyWindow;
-@end
-
-@implementation  TSAlertOverlayWindow
-@synthesize oldKeyWindow;
-
-- (void) makeKeyAndVisible
-{
-	self.oldKeyWindow = [[UIApplication sharedApplication] keyWindow];
-	self.windowLevel = UIWindowLevelAlert;
-	[super makeKeyAndVisible];
-}
-
-- (void) resignKeyWindow
-{
-	[super resignKeyWindow];
-	[self.oldKeyWindow makeKeyWindow];
-}
-
-- (void) drawRect: (CGRect) rect
-{
-	// render the radial gradient behind the alertview
-    self.layer.contentsScale = 2.0;
-	CGFloat width			= self.frame.size.width;
-	CGFloat height			= self.frame.size.height;
-	CGFloat locations[3]	= { 0.0, 0.5, 1.0 	};
-	CGFloat components[12]	= {	0, 0, 0, 0.1,
-		0, 0, 0, 0.33,
-		0, 0, 0, 0.5	};
-    
-	CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
-	CGGradientRef backgroundGradient = CGGradientCreateWithColorComponents(colorspace, components, locations, 3);
-	CGColorSpaceRelease(colorspace);
-    
-	CGContextDrawRadialGradient(UIGraphicsGetCurrentContext(), 
-								backgroundGradient, 
-								CGPointMake(width/2, height/2), 0,
-								CGPointMake(width/2, height/2), width,
-								0);
-    
-	CGGradientRelease(backgroundGradient);
-}
-
-@end
-
-
-// Usage example:
-// input image: http://f.cl.ly/items/3v0S3w2B3N0p3e0I082d/Image%202011.07.22%2011:29:25%20PM.png
-//
-// UIImage *buttonImage = [UIImage ipMaskedImageNamed:@"UIButtonBarAction.png" color:[UIColor redColor]];
-
-// .h
-@interface UIImage (IPImageUtils)
-+ (UIImage *)ipMaskedImageNamed:(NSString *)name color:(UIColor *)color;
-@end
-
-// .m
-@implementation UIImage (IPImageUtils)
-
-+ (UIImage *)ipMaskedImageNamed:(NSString *)name color:(UIColor *)color
-{
-	UIImage *image = [UIImage imageNamed:name];
-	CGRect rect = CGRectMake(0, 0, image.size.width, image.size.height);
-	UIGraphicsBeginImageContextWithOptions(rect.size, NO, image.scale);
-	CGContextRef c = UIGraphicsGetCurrentContext();
-	[image drawInRect:rect];
-	CGContextSetFillColorWithColor(c, [color CGColor]);
-	CGContextSetBlendMode(c, kCGBlendModeSourceAtop);
-	CGContextFillRect(c, rect);
-	UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
-	return result;
-}
-
-@end
-
 @interface JSAlertViewPresenter ()
 
 @property (nonatomic, strong) NSMutableArray *alertViews;
@@ -100,13 +20,13 @@
 @property (nonatomic, strong) UIImageView *bgShadow;
 @property (nonatomic, assign) BOOL isAnimating;
 
-- (void)dismissAlertView:(JSAlertView *)alertView withCancelAnimation:(BOOL)animated;
-- (void)dismissAlertView:(JSAlertView *)alertView withAcceptAnimation:(BOOL)animated;
+- (void)dismissAlertView:(JSAlertView *)alertView withCancelAnimation:(BOOL)animated atButtonIndex:(NSInteger)index;
+- (void)dismissAlertView:(JSAlertView *)alertView withAcceptAnimation:(BOOL)animated atButtonIndex:(NSInteger)index;
 
-- (void)dismissAlertView:(JSAlertView *)alertView withShrinkAnimation:(BOOL)animated;
-- (void)dismissAlertView:(JSAlertView *)alertView withFallAnimation:(BOOL)animated;
-- (void)dismissAlertView:(JSAlertView *)alertView withExpandAnimation:(BOOL)animated;
-- (void)dismissAlertView:(JSAlertView *)alertView withFadeAnimation:(BOOL)animated;
+- (void)dismissAlertView:(JSAlertView *)alertView withShrinkAnimation:(BOOL)animated atButtonIndex:(NSInteger)index;
+- (void)dismissAlertView:(JSAlertView *)alertView withFallAnimation:(BOOL)animated atButtonIndex:(NSInteger)index;
+- (void)dismissAlertView:(JSAlertView *)alertView withExpandAnimation:(BOOL)animated atButtonIndex:(NSInteger)index;
+- (void)dismissAlertView:(JSAlertView *)alertView withFadeAnimation:(BOOL)animated atButtonIndex:(NSInteger)index;
 
 - (void)prepareBackgroundShadow;
 - (void)prepareAlertContainerView;
@@ -119,16 +39,6 @@
 
 @implementation JSAlertViewPresenter
 
-@synthesize defaultBackgroundImage = _defaultBackgroundImage;
-@synthesize defaultBackgroundEdgeInsets = _defaultBackgroundEdgeInsets;
-@synthesize defaultCancelButtonImage_Normal = _defaultCancelButtonImage_Normal;
-@synthesize defaultCancelButtonImage_Highlighted = _defaultCancelButtonImage_Highlighted;
-@synthesize defaultAcceptButtonImage_Normal = _defaultAcceptButtonImage_Normal;
-@synthesize defaultAcceptButtonImage_Highlighted = _defaultAcceptButtonImage_Highlighted;
-@synthesize defaultTitleTextAttributes = _defaultTitleTextAttributes;
-@synthesize defaultMessageTextAttributes = _defaultMessageTextAttributes;
-@synthesize defaultCancelButtonTextAttributes = _defaultCancelButtonTextAttributes;
-@synthesize defaultAcceptButtonTextAttributes = _defaultAcceptButtonTextAttributes;
 @synthesize defaultCancelDismissalStyle = _defaultCancelDismissalStyle;
 @synthesize defaultAcceptDismissalStyle = _defaultAcceptDismissalStyle;
 @synthesize alertViews = _alertViews;
@@ -138,6 +48,7 @@
 @synthesize alertOverlayWindow = _alertOverlayWindow;
 @synthesize bgShadow = _bgShadow;
 @synthesize isAnimating = _isAnimating;
+@synthesize defaultColor = _defaultColor;
 
 + (id)sharedAlertViewPresenter {
     static dispatch_once_t once;
@@ -211,6 +122,10 @@
     _isAnimating = YES;
     self.visibleAlertView = alertView;
     
+    if ([alertView.delegate respondsToSelector:@selector(JS_willPresentAlertView:)]) {
+        [alertView.delegate JS_willPresentAlertView:alertView];
+    }
+    
     if (self.alertOverlayWindow == nil) {
         [self prepareWindow];
     }
@@ -243,6 +158,9 @@
                 alertView.transform = CGAffineTransformIdentity;
             } completion:^(BOOL finished) {
                 _isAnimating = NO;
+                if ([alertView.delegate respondsToSelector:@selector(JS_didPresentAlertView:)]) {
+                    [alertView.delegate JS_didPresentAlertView:alertView];
+                }
             }];
         }];
     }];
@@ -270,62 +188,65 @@
 }
 
 - (void)JS_alertView:(JSAlertView *)sender tappedButtonAtIndex:(NSInteger)index animated:(BOOL)animated {
+    if ([sender.delegate respondsToSelector:@selector(JS_alertView:willDismissWithButtonIndex:)]) {
+        [sender.delegate JS_alertView:sender willDismissWithButtonIndex:index];
+    }
     if (index == kCancelButtonIndex) {      
         if (sender.numberOfButtons > 1) {
-            [self dismissAlertView:sender withCancelAnimation:animated];
+            [self dismissAlertView:sender withCancelAnimation:animated atButtonIndex:index];
         } else {
-            [self dismissAlertView:sender withAcceptAnimation:animated];
+            [self dismissAlertView:sender withAcceptAnimation:animated atButtonIndex:index];
         }
     } else {
-        [self dismissAlertView:sender withAcceptAnimation:animated];
+        [self dismissAlertView:sender withAcceptAnimation:animated atButtonIndex:index];
     }
 }
 
-- (void)dismissAlertView:(JSAlertView *)alertView withCancelAnimation:(BOOL)animated {
+- (void)dismissAlertView:(JSAlertView *)alertView withCancelAnimation:(BOOL)animated atButtonIndex:(NSInteger)index {
     if (self.alertViews.count == 1) {
         [self hideBackgroundShadow];
     }
     switch (self.defaultCancelDismissalStyle) {
         case JSAlertViewDismissalStyleShrink:
-            [self dismissAlertView:alertView withShrinkAnimation:animated];
+            [self dismissAlertView:alertView withShrinkAnimation:animated atButtonIndex:index];
             break;
         case JSAlertViewDismissalStyleFall:
-            [self dismissAlertView:alertView withFallAnimation:animated];
+            [self dismissAlertView:alertView withFallAnimation:animated atButtonIndex:index];
             break;
         case JSAlertViewDismissalStyleExpand:
-            [self dismissAlertView:alertView withExpandAnimation:animated];
+            [self dismissAlertView:alertView withExpandAnimation:animated atButtonIndex:index];
             break;
         case JSAlertViewDismissalStyleFade:
-            [self dismissAlertView:alertView withFadeAnimation:animated];
+            [self dismissAlertView:alertView withFadeAnimation:animated atButtonIndex:index];
             break;
         default:
             break;
     }    
 }
 
-- (void)dismissAlertView:(JSAlertView *)alertView withAcceptAnimation:(BOOL)animated {
+- (void)dismissAlertView:(JSAlertView *)alertView withAcceptAnimation:(BOOL)animated atButtonIndex:(NSInteger)index {
     if (self.alertViews.count == 1) {
         [self hideBackgroundShadow];
     }
     switch (self.defaultAcceptDismissalStyle) {
         case JSAlertViewDismissalStyleShrink:
-            [self dismissAlertView:alertView withShrinkAnimation:animated];
+            [self dismissAlertView:alertView withShrinkAnimation:animated atButtonIndex:index];
             break;
         case JSAlertViewDismissalStyleFall:
-            [self dismissAlertView:alertView withFallAnimation:animated];
+            [self dismissAlertView:alertView withFallAnimation:animated atButtonIndex:index];
             break;
         case JSAlertViewDismissalStyleExpand:
-            [self dismissAlertView:alertView withExpandAnimation:animated];
+            [self dismissAlertView:alertView withExpandAnimation:animated atButtonIndex:index];
             break;
         case JSAlertViewDismissalStyleFade:
-            [self dismissAlertView:alertView withFadeAnimation:animated];
+            [self dismissAlertView:alertView withFadeAnimation:animated atButtonIndex:index];
             break;
         default:
             break;
     }
 }
 
-- (void)dismissAlertView:(JSAlertView *)alertView withShrinkAnimation:(BOOL)animated {
+- (void)dismissAlertView:(JSAlertView *)alertView withShrinkAnimation:(BOOL)animated atButtonIndex:(NSInteger)index {
     CGFloat duration = 0.0f;
     if (animated) {
         duration = 0.2f;
@@ -338,11 +259,14 @@
         [blockSafeAlertView removeFromSuperview];
         [self.alertViews removeObject:blockSafeAlertView];
         self.visibleAlertView = nil;
+        if ([alertView.delegate respondsToSelector:@selector(JS_alertView:didDismissWithButtonIndex:)]) {
+            [alertView.delegate JS_alertView:alertView didDismissWithButtonIndex:index];
+        }
         [self showNextAlertView];
     }];
 }
 
-- (void)dismissAlertView:(JSAlertView *)alertView withFallAnimation:(BOOL)animated {
+- (void)dismissAlertView:(JSAlertView *)alertView withFallAnimation:(BOOL)animated atButtonIndex:(NSInteger)index {
     CGFloat duration = 0.0f;
     if (animated) {
         duration = 0.3f;
@@ -358,11 +282,14 @@
         [blockSafeAlertView removeFromSuperview];
         [self.alertViews removeObject:blockSafeAlertView];
         self.visibleAlertView = nil;
+        if ([alertView.delegate respondsToSelector:@selector(JS_alertView:didDismissWithButtonIndex:)]) {
+            [alertView.delegate JS_alertView:alertView didDismissWithButtonIndex:index];
+        }
         [self showNextAlertView];
     }];
 }
 
-- (void)dismissAlertView:(JSAlertView *)alertView withExpandAnimation:(BOOL)animated {
+- (void)dismissAlertView:(JSAlertView *)alertView withExpandAnimation:(BOOL)animated atButtonIndex:(NSInteger)index {
     CGFloat duration = 0.0f;
     if (animated) {
         duration = 0.25f;
@@ -375,11 +302,14 @@
         [blockSafeAlertView removeFromSuperview];
         [self.alertViews removeObject:blockSafeAlertView];
         self.visibleAlertView = nil;
+        if ([alertView.delegate respondsToSelector:@selector(JS_alertView:didDismissWithButtonIndex:)]) {
+            [alertView.delegate JS_alertView:alertView didDismissWithButtonIndex:index];
+        }
         [self showNextAlertView];
     }];
 }
 
-- (void)dismissAlertView:(JSAlertView *)alertView withFadeAnimation:(BOOL)animated {
+- (void)dismissAlertView:(JSAlertView *)alertView withFadeAnimation:(BOOL)animated atButtonIndex:(NSInteger)index {
     CGFloat duration = 0.0f;
     if (animated) {
         duration = 0.25f;
@@ -390,6 +320,9 @@
         [alertView removeFromSuperview];
         [self.alertViews removeObject:alertView];
         self.visibleAlertView = nil;
+        if ([alertView.delegate respondsToSelector:@selector(JS_alertView:didDismissWithButtonIndex:)]) {
+            [alertView.delegate JS_alertView:alertView didDismissWithButtonIndex:index];
+        }
         [self showNextAlertView];
     }];
 }
@@ -450,11 +383,9 @@
 }
 
 - (void)resetDefaultAppearance {
-    _defaultBackgroundEdgeInsets = UIEdgeInsetsMake(40, 40, 40, 40);
-    UIImage *defaultWithColor = [UIImage ipMaskedImageNamed:@"jsAlertView_defaultBackground_alphaOnly.png" color:[UIColor colorWithRed:0.3 green:0.0 blue:0.3 alpha:1.0]];
-    _defaultBackgroundImage = [defaultWithColor resizableImageWithCapInsets:_defaultBackgroundEdgeInsets];
     _defaultCancelDismissalStyle = JSAlertViewDismissalStyleFade;
     _defaultAcceptDismissalStyle = JSAlertViewDismissalStyleFade;
+    _defaultColor = [UIColor colorWithRed:0.02f green:0.06f blue:0.25f alpha:1.0f];
 }
 
 @end
