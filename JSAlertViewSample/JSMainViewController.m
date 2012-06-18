@@ -85,7 +85,7 @@
                                                        delegate:nil 
                                               cancelButtonTitle:nil 
                                               otherButtonTitles: @"Okay", nil];
-    alertView.tintColor = [UIColor colorWithRed:0.7 green:0.1 blue:0.05 alpha:1.0];
+    alertView.tintColor = [UIColor colorWithRed:0.75 green:0.0 blue:0.0 alpha:1.0];
     [alertView show];
 }
 - (IBAction)buttonPressedGreen:(id)sender {
@@ -94,7 +94,7 @@
                                                        delegate:nil 
                                               cancelButtonTitle:nil 
                                               otherButtonTitles: @"Okay", nil];
-    alertView.tintColor = [UIColor colorWithRed:0.0 green:0.7 blue:0.05 alpha:1.0];
+    alertView.tintColor = [UIColor colorWithRed:0.0 green:0.33 blue:0.0 alpha:1.0];
     [alertView show];
 }
 - (IBAction)buttonPressedGrey:(id)sender {
@@ -103,7 +103,7 @@
                                                        delegate:nil 
                                               cancelButtonTitle:nil 
                                               otherButtonTitles: @"Okay", nil];
-    alertView.tintColor = [UIColor colorWithRed:0.25 green:0.25 blue:0.25 alpha:1.0];
+    alertView.tintColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1.0];
     [alertView show];
 }
 

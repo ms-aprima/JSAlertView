@@ -17,6 +17,7 @@
 		7F39F6A0158E36F400AD24B4 /* jsAlertView_iOS_okayButton_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F39F696158E36F400AD24B4 /* jsAlertView_iOS_okayButton_normal@2x.png */; };
 		7F39F6A1158E36F400AD24B4 /* jsAlertView_iOS_okayCancelButton_highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F39F697158E36F400AD24B4 /* jsAlertView_iOS_okayCancelButton_highlighted.png */; };
 		7F39F6A2158E36F400AD24B4 /* jsAlertView_iOS_okayCancelButton_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F39F698158E36F400AD24B4 /* jsAlertView_iOS_okayCancelButton_highlighted@2x.png */; };
+		7F6C26B7158F94F700B95705 /* JSMainViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F6C26B6158F94F700B95705 /* JSMainViewController_iPad.xib */; };
 		7FAEB8EC158A2538006CC648 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FAEB8EB158A2538006CC648 /* UIKit.framework */; };
 		7FAEB8EE158A2538006CC648 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FAEB8ED158A2538006CC648 /* Foundation.framework */; };
 		7FAEB8F0158A2538006CC648 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FAEB8EF158A2538006CC648 /* CoreGraphics.framework */; };
@@ -26,10 +27,7 @@
 		7FAEB8FF158A2538006CC648 /* JSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FAEB8FE158A2538006CC648 /* JSMainViewController.m */; };
 		7FAEB905158A2538006CC648 /* JSMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7FAEB903158A2538006CC648 /* JSMainViewController.xib */; };
 		7FAEB910158A2DEE006CC648 /* JSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FAEB90F158A2DEE006CC648 /* JSAlertView.m */; };
-		7FD48576158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FD48572158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPad.png */; };
-		7FD48577158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FD48573158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPad@2x.png */; };
 		7FD48578158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FD48574158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPhone.png */; };
-		7FD48579158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FD48575158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPhone@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +41,7 @@
 		7F39F696158E36F400AD24B4 /* jsAlertView_iOS_okayButton_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jsAlertView_iOS_okayButton_normal@2x.png"; sourceTree = "<group>"; };
 		7F39F697158E36F400AD24B4 /* jsAlertView_iOS_okayCancelButton_highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jsAlertView_iOS_okayCancelButton_highlighted.png; sourceTree = "<group>"; };
 		7F39F698158E36F400AD24B4 /* jsAlertView_iOS_okayCancelButton_highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jsAlertView_iOS_okayCancelButton_highlighted@2x.png"; sourceTree = "<group>"; };
+		7F6C26B6158F94F700B95705 /* JSMainViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JSMainViewController_iPad.xib; sourceTree = "<group>"; };
 		7FAEB8E7158A2538006CC648 /* JSAlertViewSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JSAlertViewSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FAEB8EB158A2538006CC648 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7FAEB8ED158A2538006CC648 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -58,10 +57,7 @@
 		7FAEB904158A2538006CC648 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/JSMainViewController.xib; sourceTree = "<group>"; };
 		7FAEB90E158A2DEE006CC648 /* JSAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSAlertView.h; sourceTree = "<group>"; };
 		7FAEB90F158A2DEE006CC648 /* JSAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSAlertView.m; sourceTree = "<group>"; };
-		7FD48572158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jsAlertView_gradientShadowOverlay_iPad.png; sourceTree = "<group>"; };
-		7FD48573158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jsAlertView_gradientShadowOverlay_iPad@2x.png"; sourceTree = "<group>"; };
 		7FD48574158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jsAlertView_gradientShadowOverlay_iPhone.png; sourceTree = "<group>"; };
-		7FD48575158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jsAlertView_gradientShadowOverlay_iPhone@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,10 +87,7 @@
 		7F01B076158D0870006B09CC /* JSAlertView Images */ = {
 			isa = PBXGroup;
 			children = (
-				7FD48572158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPad.png */,
-				7FD48573158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPad@2x.png */,
 				7FD48574158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPhone.png */,
-				7FD48575158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPhone@2x.png */,
 				7F39F693158E36F400AD24B4 /* jsAlertView_iOS_cancelButton_normal.png */,
 				7F39F694158E36F400AD24B4 /* jsAlertView_iOS_cancelButton_normal@2x.png */,
 				7F39F695158E36F400AD24B4 /* jsAlertView_iOS_okayButton_normal.png */,
@@ -145,6 +138,7 @@
 				7FAEB8FD158A2538006CC648 /* JSMainViewController.h */,
 				7FAEB8FE158A2538006CC648 /* JSMainViewController.m */,
 				7FAEB903158A2538006CC648 /* JSMainViewController.xib */,
+				7F6C26B6158F94F700B95705 /* JSMainViewController_iPad.xib */,
 				7F00D836158BBB60005975C5 /* JSAlertView */,
 				7FAEB8F2158A2538006CC648 /* Supporting Files */,
 			);
@@ -225,10 +219,8 @@
 				7F39F6A0158E36F400AD24B4 /* jsAlertView_iOS_okayButton_normal@2x.png in Resources */,
 				7F39F6A1158E36F400AD24B4 /* jsAlertView_iOS_okayCancelButton_highlighted.png in Resources */,
 				7F39F6A2158E36F400AD24B4 /* jsAlertView_iOS_okayCancelButton_highlighted@2x.png in Resources */,
-				7FD48576158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPad.png in Resources */,
-				7FD48577158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPad@2x.png in Resources */,
 				7FD48578158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPhone.png in Resources */,
-				7FD48579158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPhone@2x.png in Resources */,
+				7F6C26B7158F94F700B95705 /* JSMainViewController_iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,7 +311,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JSAlertViewSample/JSAlertViewSample-Prefix.pch";
 				INFOPLIST_FILE = "JSAlertViewSample/JSAlertViewSample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -330,7 +324,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JSAlertViewSample/JSAlertViewSample-Prefix.pch";
 				INFOPLIST_FILE = "JSAlertViewSample/JSAlertViewSample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -58,6 +58,7 @@
 @property (nonatomic, strong) UIView *alertContainerView;
 @property (nonatomic, assign) UIDeviceOrientation currentOrientation;
 @property (nonatomic, strong) UIWindow *alertOverlayWindow;
+@property (nonatomic, strong) UIWindow *originalKeyWindow;
 @property (nonatomic, strong) UIImageView *bgShadow;
 @property (nonatomic, assign) BOOL isAnimating;
 
@@ -74,7 +75,7 @@
 - (void)prepareWindow;
 - (void)presentAlertView:(JSAlertView *)alertView;
 - (void)showNextAlertView;
-- (void)hideBackgroundShadow;
+- (void)dismissWindow;
 
 @end
 
@@ -90,6 +91,7 @@
 @synthesize bgShadow = _bgShadow;
 @synthesize isAnimating = _isAnimating;
 @synthesize defaultColor = _defaultColor;
+@synthesize originalKeyWindow = _originalKeyWindow;
 
 #define kCancelButtonIndex 0
 
@@ -215,7 +217,7 @@
     } 
 }
 
-- (void)hideBackgroundShadow {
+- (void)dismissWindow {
     [UIView animateWithDuration:0.33f animations:^{
         _bgShadow.alpha = 0.0f;
     } completion:^(BOOL finished) {
@@ -226,7 +228,8 @@
         self.bgShadow = nil;
         self.alertContainerView = nil;
         self.alertOverlayWindow = nil;
-        [(UIWindow *)[[[UIApplication sharedApplication] windows] objectAtIndex:0] makeKeyWindow];
+        [self.originalKeyWindow makeKeyAndVisible];
+        self.originalKeyWindow = nil;
     }];
 }
 
@@ -247,7 +250,7 @@
 
 - (void)dismissAlertView:(JSAlertView *)alertView withCancelAnimation:(BOOL)animated atButtonIndex:(NSInteger)index {
     if (self.alertViews.count == 1) {
-        [self hideBackgroundShadow];
+        [self dismissWindow];
     }
     switch (self.defaultCancelDismissalStyle) {
         case JSAlertViewDismissalStyleShrink:
@@ -270,7 +273,7 @@
 
 - (void)dismissAlertView:(JSAlertView *)alertView withAcceptAnimation:(BOOL)animated atButtonIndex:(NSInteger)index {
     if (self.alertViews.count == 1) {
-        [self hideBackgroundShadow];
+        [self dismissWindow];
     }
     switch (self.defaultAcceptDismissalStyle) {
         case JSAlertViewDismissalStyleShrink:
@@ -375,19 +378,15 @@
 #pragma mark - Convenience Methods
 
 - (void)prepareWindow {
-    self.alertOverlayWindow = [[UIWindow alloc] initWithFrame:[[[UIApplication sharedApplication] keyWindow] frame]];
+    self.originalKeyWindow = [[UIApplication sharedApplication] keyWindow];
+    self.alertOverlayWindow = [[UIWindow alloc] initWithFrame:[self.originalKeyWindow frame]];
     _alertOverlayWindow.windowLevel = UIWindowLevelAlert;
     _alertOverlayWindow.backgroundColor = [UIColor clearColor];
     [self.alertOverlayWindow makeKeyAndVisible];
 }
 
 - (void)prepareBackgroundShadow {
-    UIImage *shadowImage;
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        shadowImage = [UIImage imageFromMainBundleFile:@"jsAlertView_gradientShadowOverlay_iPhone.png"];
-    } else if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        shadowImage = [UIImage imageFromMainBundleFile:@"jsAlertView_gradientShadowOverlay_iPad.png"];
-    }
+    UIImage *shadowImage = [UIImage imageFromMainBundleFile:@"jsAlertView_gradientShadowOverlay_iPhone.png"]; // Used to use separate images for each device. This one looks great by itself.
     self.bgShadow = [[UIImageView alloc] initWithImage:shadowImage];
     _bgShadow.frame = [[UIScreen mainScreen] bounds];
     _bgShadow.contentMode = UIViewContentModeScaleToFill;

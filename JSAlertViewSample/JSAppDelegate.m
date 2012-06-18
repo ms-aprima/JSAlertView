@@ -10,6 +10,7 @@
 
 #import "JSMainViewController.h"
 
+
 @implementation JSAppDelegate
 
 @synthesize window = _window;
@@ -19,7 +20,11 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.mainViewController = [[JSMainViewController alloc] initWithNibName:@"JSMainViewController" bundle:nil];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        self.mainViewController = [[JSMainViewController alloc] initWithNibName:@"JSMainViewController_iPad" bundle:nil];
+    } else {
+        self.mainViewController = [[JSMainViewController alloc] initWithNibName:@"JSMainViewController" bundle:nil];
+    }
     self.window.rootViewController = self.mainViewController;
     [self.window makeKeyAndVisible];
     return YES;
