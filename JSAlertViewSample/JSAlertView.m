@@ -9,22 +9,17 @@
 #import "JSAlertView.h"
 #import <QuartzCore/QuartzCore.h>
 
-// Usage example:
-// input image: http://f.cl.ly/items/3v0S3w2B3N0p3e0I082d/Image%202011.07.22%2011:29:25%20PM.png
-//
-// UIImage *buttonImage = [UIImage ipMaskedImageNamed:@"UIButtonBarAction.png" color:[UIColor redColor]];
-
-// .h
 @interface UIImage (IPImageUtils)
+
 + (UIImage *)ipMaskedImageNamed:(NSString *)name color:(UIColor *)color;
++ (UIImage*)imageFromMainBundleFile:(NSString*)aFileName;
+
 @end
 
-// .m
 @implementation UIImage (IPImageUtils)
 
-+ (UIImage *)ipMaskedImageNamed:(NSString *)name color:(UIColor *)color
-{
-	UIImage *image = [UIImage imageNamed:name];
++ (UIImage *)ipMaskedImageNamed:(NSString *)name color:(UIColor *)color {
+	UIImage *image = [UIImage imageFromMainBundleFile:name];
 	CGRect rect = CGRectMake(0, 0, image.size.width, image.size.height);
 	UIGraphicsBeginImageContextWithOptions(rect.size, NO, image.scale);
 	CGContextRef c = UIGraphicsGetCurrentContext();
@@ -34,6 +29,11 @@
 	CGContextFillRect(c, rect);
 	UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
 	return result;
+}
+
++ (UIImage*)imageFromMainBundleFile:(NSString*)aFileName; {
+    NSString* bundlePath = [[NSBundle mainBundle] bundlePath];
+    return [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@/%@", bundlePath,aFileName]];
 }
 
 @end
@@ -382,9 +382,9 @@
 - (void)prepareBackgroundShadow {
     UIImage *shadowImage;
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        shadowImage = [UIImage imageNamed:@"jsAlertView_gradientShadowOverlay_iPhone.png"];
+        shadowImage = [UIImage imageFromMainBundleFile:@"jsAlertView_gradientShadowOverlay_iPhone.png"];
     } else if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        shadowImage = [UIImage imageNamed:@"jsAlertView_gradientShadowOverlay_iPad.png"];
+        shadowImage = [UIImage imageFromMainBundleFile:@"jsAlertView_gradientShadowOverlay_iPad.png"];
     }
     self.bgShadow = [[UIImageView alloc] initWithImage:shadowImage];
     _bgShadow.frame = [[UIScreen mainScreen] bounds];
@@ -610,7 +610,7 @@
     _littleWindowBG.frame = self.frame;
     _littleWindowBG.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     _littleWindowBG.userInteractionEnabled = YES;
-    UIImageView *overlayBorder = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"jsAlertView_defaultBackground_overlay.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(40, 40, 40, 40)]];
+    UIImageView *overlayBorder = [[UIImageView alloc] initWithImage:[[UIImage imageFromMainBundleFile:@"jsAlertView_defaultBackground_overlay.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(40, 40, 40, 40)]];
     overlayBorder.frame = _littleWindowBG.frame;
     overlayBorder.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     overlayBorder.userInteractionEnabled = NO;
@@ -670,13 +670,13 @@
         _cancelButton.frame = CGRectMake(kLeftButtonOriginX, yOrigin, kMaxButtonWidth, kButtonHeight);
     }
     if (_acceptButtonTitles.count > 0) {
-        [_cancelButton setBackgroundImage:[[UIImage imageNamed:@"jsAlertView_iOS_cancelButton_normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
+        [_cancelButton setBackgroundImage:[[UIImage imageFromMainBundleFile:@"jsAlertView_iOS_cancelButton_normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
                                  forState:UIControlStateNormal];
     } else {
-        [_cancelButton setBackgroundImage:[[UIImage imageNamed:@"jsAlertView_iOS_okayButton_normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
+        [_cancelButton setBackgroundImage:[[UIImage imageFromMainBundleFile:@"jsAlertView_iOS_okayButton_normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
                                 forState:UIControlStateNormal];
     }
-    [_cancelButton setBackgroundImage:[[UIImage imageNamed:@"jsAlertView_iOS_okayCancelButton_highlighted.png"]  resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
+    [_cancelButton setBackgroundImage:[[UIImage imageFromMainBundleFile:@"jsAlertView_iOS_okayCancelButton_highlighted.png"]  resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
                              forState:UIControlStateHighlighted];
     [_cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_cancelButton setTitleShadowColor:[UIColor colorWithWhite:0.0f alpha:0.5f] forState:UIControlStateNormal];
@@ -708,9 +708,9 @@
         } else {
             acceptButton.frame = CGRectMake(kLeftButtonOriginX, yOrigin, kMaxButtonWidth, kButtonHeight);
         }
-        [acceptButton setBackgroundImage:[[UIImage imageNamed:@"jsAlertView_iOS_okayButton_normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
+        [acceptButton setBackgroundImage:[[UIImage imageFromMainBundleFile:@"jsAlertView_iOS_okayButton_normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
                                  forState:UIControlStateNormal];
-        [acceptButton setBackgroundImage:[[UIImage imageNamed:@"jsAlertView_iOS_okayCancelButton_highlighted.png"]  resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
+        [acceptButton setBackgroundImage:[[UIImage imageFromMainBundleFile:@"jsAlertView_iOS_okayCancelButton_highlighted.png"]  resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
                                  forState:UIControlStateHighlighted];
         [acceptButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [acceptButton setTitleShadowColor:[UIColor colorWithWhite:0.0f alpha:0.5f] forState:UIControlStateNormal];
