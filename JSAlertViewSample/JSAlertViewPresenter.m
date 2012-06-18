@@ -331,7 +331,7 @@
         duration = 0.2f;
     }
     __weak UIView *blockSafeAlertView = alertView;
-    [UIView animateWithDuration:duration delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:duration delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^{
         blockSafeAlertView.alpha = 0.0f;
         blockSafeAlertView.transform = CGAffineTransformMakeScale(0.01, 0.01);
     } completion:^(BOOL finished) {
@@ -365,7 +365,7 @@
 - (void)dismissAlertView:(JSAlertView *)alertView withExpandAnimation:(BOOL)animated {
     CGFloat duration = 0.0f;
     if (animated) {
-        duration = 0.2f;
+        duration = 0.25f;
     }
     __weak UIView *blockSafeAlertView = alertView;
     [UIView animateWithDuration:duration delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
