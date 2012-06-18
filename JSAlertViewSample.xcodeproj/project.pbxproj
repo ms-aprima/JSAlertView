@@ -308,11 +308,13 @@
 		7FAEB90C158A2538006CC648 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jared Sinclair (3NH6Y8678Z)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JSAlertViewSample/JSAlertViewSample-Prefix.pch";
 				INFOPLIST_FILE = "JSAlertViewSample/JSAlertViewSample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C5EDAF65-FB3D-423A-A6A3-AD326645FBBF";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -321,11 +323,13 @@
 		7FAEB90D158A2538006CC648 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jared Sinclair";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JSAlertViewSample/JSAlertViewSample-Prefix.pch";
 				INFOPLIST_FILE = "JSAlertViewSample/JSAlertViewSample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D0F29B57-B691-45CF-84D7-AB0FD8E913FF";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
