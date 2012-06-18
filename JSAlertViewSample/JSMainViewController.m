@@ -157,18 +157,6 @@
     }
 }
 
-#pragma mark - Flipside View
-
-- (void)flipsideViewControllerDidFinish:(JSFlipsideViewController *)controller {
-    [self dismissModalViewControllerAnimated:YES];
-}
-
-- (IBAction)showInfo:(id)sender {    
-    JSFlipsideViewController *controller = [[JSFlipsideViewController alloc] initWithNibName:@"JSFlipsideViewController" bundle:nil];
-    controller.delegate = self;
-    controller.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self presentModalViewController:controller animated:YES];
-}
 
 @end
 

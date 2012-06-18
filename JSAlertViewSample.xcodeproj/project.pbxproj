@@ -24,14 +24,8 @@
 		7FAEB8F8158A2538006CC648 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FAEB8F7158A2538006CC648 /* main.m */; };
 		7FAEB8FC158A2538006CC648 /* JSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FAEB8FB158A2538006CC648 /* JSAppDelegate.m */; };
 		7FAEB8FF158A2538006CC648 /* JSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FAEB8FE158A2538006CC648 /* JSMainViewController.m */; };
-		7FAEB902158A2538006CC648 /* JSFlipsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FAEB901158A2538006CC648 /* JSFlipsideViewController.m */; };
 		7FAEB905158A2538006CC648 /* JSMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7FAEB903158A2538006CC648 /* JSMainViewController.xib */; };
-		7FAEB908158A2538006CC648 /* JSFlipsideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7FAEB906158A2538006CC648 /* JSFlipsideViewController.xib */; };
 		7FAEB910158A2DEE006CC648 /* JSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FAEB90F158A2DEE006CC648 /* JSAlertView.m */; };
-		7FCFBEF4158EFA9C00B34AB1 /* general_blueButton_highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FCFBEF0158EFA9C00B34AB1 /* general_blueButton_highlighted.png */; };
-		7FCFBEF5158EFA9C00B34AB1 /* general_blueButton_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FCFBEF1158EFA9C00B34AB1 /* general_blueButton_highlighted@2x.png */; };
-		7FCFBEF6158EFA9C00B34AB1 /* general_blueButton_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FCFBEF2158EFA9C00B34AB1 /* general_blueButton_normal.png */; };
-		7FCFBEF7158EFA9C00B34AB1 /* general_blueButton_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FCFBEF3158EFA9C00B34AB1 /* general_blueButton_normal@2x.png */; };
 		7FD48576158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FD48572158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPad.png */; };
 		7FD48577158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FD48573158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPad@2x.png */; };
 		7FD48578158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FD48574158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPhone.png */; };
@@ -61,16 +55,9 @@
 		7FAEB8FB158A2538006CC648 /* JSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JSAppDelegate.m; sourceTree = "<group>"; };
 		7FAEB8FD158A2538006CC648 /* JSMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSMainViewController.h; sourceTree = "<group>"; };
 		7FAEB8FE158A2538006CC648 /* JSMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JSMainViewController.m; sourceTree = "<group>"; };
-		7FAEB900158A2538006CC648 /* JSFlipsideViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSFlipsideViewController.h; sourceTree = "<group>"; };
-		7FAEB901158A2538006CC648 /* JSFlipsideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JSFlipsideViewController.m; sourceTree = "<group>"; };
 		7FAEB904158A2538006CC648 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/JSMainViewController.xib; sourceTree = "<group>"; };
-		7FAEB907158A2538006CC648 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/JSFlipsideViewController.xib; sourceTree = "<group>"; };
 		7FAEB90E158A2DEE006CC648 /* JSAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSAlertView.h; sourceTree = "<group>"; };
 		7FAEB90F158A2DEE006CC648 /* JSAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSAlertView.m; sourceTree = "<group>"; };
-		7FCFBEF0158EFA9C00B34AB1 /* general_blueButton_highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = general_blueButton_highlighted.png; sourceTree = "<group>"; };
-		7FCFBEF1158EFA9C00B34AB1 /* general_blueButton_highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "general_blueButton_highlighted@2x.png"; sourceTree = "<group>"; };
-		7FCFBEF2158EFA9C00B34AB1 /* general_blueButton_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = general_blueButton_normal.png; sourceTree = "<group>"; };
-		7FCFBEF3158EFA9C00B34AB1 /* general_blueButton_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "general_blueButton_normal@2x.png"; sourceTree = "<group>"; };
 		7FD48572158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jsAlertView_gradientShadowOverlay_iPad.png; sourceTree = "<group>"; };
 		7FD48573158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jsAlertView_gradientShadowOverlay_iPad@2x.png"; sourceTree = "<group>"; };
 		7FD48574158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jsAlertView_gradientShadowOverlay_iPhone.png; sourceTree = "<group>"; };
@@ -153,18 +140,11 @@
 		7FAEB8F1158A2538006CC648 /* JSAlertViewSample */ = {
 			isa = PBXGroup;
 			children = (
-				7FCFBEF0158EFA9C00B34AB1 /* general_blueButton_highlighted.png */,
-				7FCFBEF1158EFA9C00B34AB1 /* general_blueButton_highlighted@2x.png */,
-				7FCFBEF2158EFA9C00B34AB1 /* general_blueButton_normal.png */,
-				7FCFBEF3158EFA9C00B34AB1 /* general_blueButton_normal@2x.png */,
 				7FAEB8FA158A2538006CC648 /* JSAppDelegate.h */,
 				7FAEB8FB158A2538006CC648 /* JSAppDelegate.m */,
 				7FAEB8FD158A2538006CC648 /* JSMainViewController.h */,
 				7FAEB8FE158A2538006CC648 /* JSMainViewController.m */,
-				7FAEB900158A2538006CC648 /* JSFlipsideViewController.h */,
-				7FAEB901158A2538006CC648 /* JSFlipsideViewController.m */,
 				7FAEB903158A2538006CC648 /* JSMainViewController.xib */,
-				7FAEB906158A2538006CC648 /* JSFlipsideViewController.xib */,
 				7F00D836158BBB60005975C5 /* JSAlertView */,
 				7FAEB8F2158A2538006CC648 /* Supporting Files */,
 			);
@@ -235,7 +215,6 @@
 			files = (
 				7FAEB8F6158A2538006CC648 /* InfoPlist.strings in Resources */,
 				7FAEB905158A2538006CC648 /* JSMainViewController.xib in Resources */,
-				7FAEB908158A2538006CC648 /* JSFlipsideViewController.xib in Resources */,
 				7F01B08B158D0870006B09CC /* jsAlertView_defaultBackground_alphaOnly.png in Resources */,
 				7F01B08C158D0870006B09CC /* jsAlertView_defaultBackground_alphaOnly@2x.png in Resources */,
 				7F01B08D158D0870006B09CC /* jsAlertView_defaultBackground_overlay.png in Resources */,
@@ -250,10 +229,6 @@
 				7FD48577158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPad@2x.png in Resources */,
 				7FD48578158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPhone.png in Resources */,
 				7FD48579158EA66B00412F98 /* jsAlertView_gradientShadowOverlay_iPhone@2x.png in Resources */,
-				7FCFBEF4158EFA9C00B34AB1 /* general_blueButton_highlighted.png in Resources */,
-				7FCFBEF5158EFA9C00B34AB1 /* general_blueButton_highlighted@2x.png in Resources */,
-				7FCFBEF6158EFA9C00B34AB1 /* general_blueButton_normal.png in Resources */,
-				7FCFBEF7158EFA9C00B34AB1 /* general_blueButton_normal@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,7 +242,6 @@
 				7FAEB8F8158A2538006CC648 /* main.m in Sources */,
 				7FAEB8FC158A2538006CC648 /* JSAppDelegate.m in Sources */,
 				7FAEB8FF158A2538006CC648 /* JSMainViewController.m in Sources */,
-				7FAEB902158A2538006CC648 /* JSFlipsideViewController.m in Sources */,
 				7FAEB910158A2DEE006CC648 /* JSAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,14 +263,6 @@
 				7FAEB904158A2538006CC648 /* en */,
 			);
 			name = JSMainViewController.xib;
-			sourceTree = "<group>";
-		};
-		7FAEB906158A2538006CC648 /* JSFlipsideViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7FAEB907158A2538006CC648 /* en */,
-			);
-			name = JSFlipsideViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

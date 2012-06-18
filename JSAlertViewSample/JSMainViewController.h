@@ -6,11 +6,8 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "JSFlipsideViewController.h"
 #import "JSAlertView.h"
 
-@interface JSMainViewController : UIViewController <JSFlipsideViewControllerDelegate, UIAlertViewDelegate, JSAlertViewDelegate>
-
-- (IBAction)showInfo:(id)sender;
+@interface JSMainViewController : UIViewController <UIAlertViewDelegate, JSAlertViewDelegate>
 
 @end
