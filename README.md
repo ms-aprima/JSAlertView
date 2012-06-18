@@ -21,9 +21,9 @@ Implementing JSAlertView is almost exactly the same as UIAlertView. For the most
 Image Resources
 ===============
 
-JSAlertView requires 14 image files to render properly on all screens. These are included in the JSAlertViewSample.app project above. 
+JSAlertView requires 11 image files to render properly on all screens. These are included in the JSAlertViewSample.app project above. The total size of all 11 images is 119kb. 
 
-The total size of all 14 images is 1.3mb. Images for iPhone and iPad at both standard and retina resolution are included. There is an important reason why some of these images are large: the background radial shadow that overlays the window is pre-rendered in Photoshop to avoid the ugly banding that appears when drawing them in code. If you can find a way to draw these gradients programmatically without banding, please let me know @jaredsinclar! As it stands, the image for the retina iPad weighs in at over 700kb by itself. Remove this image if you don't need it to save lots of space.
+The background radial shadow that overlays the window is pre-rendered in Photoshop to avoid the (even worse) banding that appears when drawing them in code. If you can find a way to draw these gradients in code without banding, please let me know @jaredsinclar!
 
 
 
