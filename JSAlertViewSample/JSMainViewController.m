@@ -11,21 +11,29 @@
 
 @interface JSMainViewController ()
 
-@property (strong, nonatomic) IBOutlet UIButton *showAlertButton;
+@property (strong, nonatomic) IBOutlet UIButton *button_iOSDefault;
+@property (strong, nonatomic) IBOutlet UIButton *button_animations;
 @property (strong, nonatomic) UIWindow *overlayWindow;
+@property (strong, nonatomic) IBOutlet UIButton *button_red;
+@property (strong, nonatomic) IBOutlet UIButton *button_green;
+@property (strong, nonatomic) IBOutlet UIButton *button_grey;
 @property (strong, nonatomic) UILabel *label;
 @property (assign, nonatomic) UIDeviceOrientation currentOrientation;
-@property (strong, nonatomic) JSAlertView *alertView2;
+@property (strong, nonatomic) JSAlertView *animationAlertView;
 
 @end
 
 @implementation JSMainViewController
 
-@synthesize showAlertButton;
+@synthesize button_iOSDefault;
+@synthesize button_animations;
 @synthesize overlayWindow = _overlayWindow;
+@synthesize button_red;
+@synthesize button_green;
+@synthesize button_grey;
 @synthesize label;
 @synthesize currentOrientation;
-@synthesize alertView2;
+@synthesize animationAlertView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,7 +42,11 @@
 }
 
 - (void)viewDidUnload {
-    [self setShowAlertButton:nil];
+    [self setButton_iOSDefault:nil];
+    [self setButton_animations:nil];
+    [self setButton_red:nil];
+    [self setButton_green:nil];
+    [self setButton_grey:nil];
     [super viewDidUnload];
 }
 
@@ -44,46 +56,71 @@
 
 #pragma mark - JSAlertView & Button
 
-- (IBAction)showAlertView:(id)sender {
-    JSAlertView *alertView = [[JSAlertView alloc] initWithTitle:@"Turn Off Airplane Mode" 
-                                                        message:@"Just like UIAlertView, JSAlertView supports stacked alerts. It also supports."
+
+- (IBAction)buttonPressedDefault:(id)sender {
+    JSAlertView *alertView = [[JSAlertView alloc] initWithTitle:@"Mimic iOS Default" 
+                                                        message:@"It's easy to mimic the appearance of a vanilla UIAlertView with JSAlertView." 
                                                        delegate:nil 
-                                              cancelButtonTitle:@"Cancel" 
-                                              otherButtonTitles:@"Rate This App", nil];
+                                              cancelButtonTitle:nil 
+                                              otherButtonTitles: @"Okay", nil];
     [alertView show];
-    JSAlertView *alertView1 = [[JSAlertView alloc] initWithTitle:@"Stacking Alerts Supported" 
-                                                         message:@"Just like UIAlertView, JSAlertView supports stacked alerts."
-                                                        delegate:nil 
-                                               cancelButtonTitle:@"Continue" 
-                                              otherButtonTitles:nil];
-    [alertView1 show];
-    self.alertView2 = [[JSAlertView alloc] initWithTitle:@"Multiple Animation Types" 
-                                                         message:@"JSAlertView has different built-in options for dismissal animations:" 
-                                                        delegate:nil 
-                                               cancelButtonTitle:@"Default" 
-                                               otherButtonTitles:@"Falling", @"Shrinking", @"Expanding", nil];
-    self.alertView2.delegate = self;
-    [self.alertView2 show];
+}
+- (IBAction)buttonPressedAnimations:(id)sender {
+    self.animationAlertView = [[JSAlertView alloc] initWithTitle:@"Different Animations" 
+                                                        message:@"There are several options for dismissal animations. These can be set globally, or an alert-by-alert basis." 
+                                                       delegate:nil 
+                                              cancelButtonTitle:@"Default"
+                                              otherButtonTitles: @"Falling", @"Shrinking", @"Expanding", nil];
+    self.animationAlertView.delegate = self;
+    [self.animationAlertView show];
+}
+
+- (IBAction)buttonPressedRed:(id)sender {
+    JSAlertView *alertView = [[JSAlertView alloc] initWithTitle:@"Supports Custom Colors" 
+                                                        message:@"Just pass a UIColor object to a JSAlertView's tintColor property prior to calling 'show'." 
+                                                       delegate:nil 
+                                              cancelButtonTitle:nil 
+                                              otherButtonTitles: @"Okay", nil];
+    alertView.tintColor = [UIColor colorWithRed:0.7 green:0.1 blue:0.05 alpha:1.0];
+    [alertView show];
+}
+- (IBAction)buttonPressedGreen:(id)sender {
+    JSAlertView *alertView = [[JSAlertView alloc] initWithTitle:@"Supports Custom Colors" 
+                                                        message:@"Just pass a UIColor object to a JSAlertView's tintColor property prior to calling 'show'." 
+                                                       delegate:nil 
+                                              cancelButtonTitle:nil 
+                                              otherButtonTitles: @"Okay", nil];
+    alertView.tintColor = [UIColor colorWithRed:0.0 green:0.7 blue:0.05 alpha:1.0];
+    [alertView show];
+}
+- (IBAction)buttonPressedGrey:(id)sender {
+    JSAlertView *alertView = [[JSAlertView alloc] initWithTitle:@"Supports Custom Colors" 
+                                                        message:@"Just pass a UIColor object to a JSAlertView's tintColor property prior to calling 'show'." 
+                                                       delegate:nil 
+                                              cancelButtonTitle:nil 
+                                              otherButtonTitles: @"Okay", nil];
+    alertView.tintColor = [UIColor colorWithRed:0.25 green:0.25 blue:0.25 alpha:1.0];
+    [alertView show];
 }
 
 - (void)JS_alertView:(JSAlertView *)alertView tappedButtonAtIndex:(NSInteger)index {
-    if (alertView == self.alertView2) {
+    if (alertView == self.animationAlertView) {
         switch (index) {
             case 0:
                 [JSAlertView setDefaultAcceptButtonDismissalAnimationStyle:JSAlertViewDismissalStyleFade];
                 [JSAlertView setDefaultCancelButtonDismissalAnimationStyle:JSAlertViewDismissalStyleFade];
                 break;
             case 1:
-                [JSAlertView setDefaultAcceptButtonDismissalAnimationStyle:JSAlertViewDismissalStyleFade];
-                [JSAlertView setDefaultCancelButtonDismissalAnimationStyle:JSAlertViewDismissalStyleFade];
+                [JSAlertView setDefaultAcceptButtonDismissalAnimationStyle:JSAlertViewDismissalStyleFall];
+                [JSAlertView setDefaultCancelButtonDismissalAnimationStyle:JSAlertViewDismissalStyleFall];
                 break;
             case 2:
-                [JSAlertView setDefaultAcceptButtonDismissalAnimationStyle:JSAlertViewDismissalStyleFade];
-                [JSAlertView setDefaultCancelButtonDismissalAnimationStyle:JSAlertViewDismissalStyleFade];
+                [JSAlertView setDefaultAcceptButtonDismissalAnimationStyle:JSAlertViewDismissalStyleShrink];
+                [JSAlertView setDefaultCancelButtonDismissalAnimationStyle:JSAlertViewDismissalStyleShrink];
                 break;
             case 3:
-                [JSAlertView setDefaultAcceptButtonDismissalAnimationStyle:JSAlertViewDismissalStyleFade];
-                [JSAlertView setDefaultCancelButtonDismissalAnimationStyle:JSAlertViewDismissalStyleFade];
+                [JSAlertView setDefaultAcceptButtonDismissalAnimationStyle:JSAlertViewDismissalStyleExpand];
+                [JSAlertView setDefaultCancelButtonDismissalAnimationStyle:JSAlertViewDismissalStyleExpand];
                 break;
             default:
                 break;
