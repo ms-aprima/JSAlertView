@@ -118,8 +118,7 @@
 #pragma mark - Rotation
 
 - (void)didRotate:(NSNotification *)notification {
-    UIWindow *mainWindow = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
-    UIViewController *rootVC = mainWindow.rootViewController;
+    UIViewController *rootVC = _originalKeyWindow.rootViewController;
     UIViewController *currentViewController = rootVC;
     if (rootVC.presentedViewController) {
         currentViewController = rootVC.presentedViewController;
@@ -162,7 +161,7 @@
                 break;
         }
     }];
-
+    
 }
 
 #pragma mark - Show, Hide, Respond
@@ -411,7 +410,8 @@
     _alertContainerView.clipsToBounds = NO;
     [_alertOverlayWindow addSubview:_alertContainerView];
     _currentOrientation = [[UIDevice currentDevice] orientation];
-    UIViewController *currentViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+    UIViewController *rootVC = _originalKeyWindow.rootViewController;
+    UIViewController *currentViewController = rootVC;
     if (currentViewController.presentedViewController) {
         currentViewController = currentViewController.presentedViewController;
     }
@@ -419,10 +419,16 @@
         _currentOrientation = [[UIApplication sharedApplication] statusBarOrientation];;
     }
     if ([currentViewController shouldAutorotateToInterfaceOrientation:_currentOrientation] == NO) {
-        if (UIDeviceOrientationIsLandscape(_currentOrientation)) {
-            _currentOrientation = _currentOrientation == UIDeviceOrientationLandscapeRight ? UIDeviceOrientationLandscapeRight : UIDeviceOrientationLandscapeLeft;
+        if ([currentViewController shouldAutorotateToInterfaceOrientation:UIDeviceOrientationPortrait]) {
+            _currentOrientation = UIDeviceOrientationPortrait;
+        } else if ([currentViewController shouldAutorotateToInterfaceOrientation:UIDeviceOrientationPortraitUpsideDown]) {
+            _currentOrientation = UIDeviceOrientationPortraitUpsideDown;
+        } else if ([currentViewController shouldAutorotateToInterfaceOrientation:UIDeviceOrientationLandscapeLeft]) {
+            _currentOrientation = UIDeviceOrientationLandscapeLeft;
+        } else if ([currentViewController shouldAutorotateToInterfaceOrientation:UIDeviceOrientationLandscapeRight]) {
+            _currentOrientation = UIDeviceOrientationLandscapeRight;
         } else {
-            _currentOrientation = _currentOrientation == UIDeviceOrientationPortrait ? UIDeviceOrientationPortrait : UIDeviceOrientationPortraitUpsideDown;
+            _currentOrientation = UIDeviceOrientationPortrait;
         }
     }
     [self updateViewForOrientation:_currentOrientation animated:NO];
@@ -642,8 +648,8 @@
 - (void)prepareMessage {
     self.messageLabel = [[UILabel alloc] init];
     self.messageSize = [_messageText sizeWithFont:[UIFont systemFontOfSize:kDefaultMessageFontSize] 
-                            constrainedToSize:CGSizeMake(kMaxMessageWidth, kMaxMessageNumberOfLines * kDefaultMessageFontSize) 
-                                lineBreakMode:UILineBreakModeTailTruncation];
+                                constrainedToSize:CGSizeMake(kMaxMessageWidth, kMaxMessageNumberOfLines * kDefaultMessageFontSize) 
+                                    lineBreakMode:UILineBreakModeTailTruncation];
     _messageLabel.frame = CGRectMake(kMessageOriginX, kTitleLeadingTop + _titleSize.height + kTitleLeadingBottom, kMaxMessageWidth, _messageSize.height);
     _messageLabel.textAlignment = UITextAlignmentCenter;
     _messageLabel.lineBreakMode = UILineBreakModeTailTruncation;
@@ -677,7 +683,7 @@
                                  forState:UIControlStateNormal];
     } else {
         [_cancelButton setBackgroundImage:[[UIImage imageFromMainBundleFile:@"jsAlertView_iOS_okayButton_normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
-                                forState:UIControlStateNormal];
+                                 forState:UIControlStateNormal];
     }
     [_cancelButton setBackgroundImage:[[UIImage imageFromMainBundleFile:@"jsAlertView_iOS_okayCancelButton_highlighted.png"]  resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
                              forState:UIControlStateHighlighted];
@@ -712,9 +718,9 @@
             acceptButton.frame = CGRectMake(kLeftButtonOriginX, yOrigin, kMaxButtonWidth, kButtonHeight);
         }
         [acceptButton setBackgroundImage:[[UIImage imageFromMainBundleFile:@"jsAlertView_iOS_okayButton_normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
-                                 forState:UIControlStateNormal];
+                                forState:UIControlStateNormal];
         [acceptButton setBackgroundImage:[[UIImage imageFromMainBundleFile:@"jsAlertView_iOS_okayCancelButton_highlighted.png"]  resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)]
-                                 forState:UIControlStateHighlighted];
+                                forState:UIControlStateHighlighted];
         [acceptButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [acceptButton setTitleShadowColor:[UIColor colorWithWhite:0.0f alpha:0.5f] forState:UIControlStateNormal];
         [acceptButton setTitle:buttonTitle forState:UIControlStateNormal];
