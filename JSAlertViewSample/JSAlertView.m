@@ -539,6 +539,7 @@
         va_end(args);
         _acceptButtons = [NSMutableArray array];
         _messageText = message;
+        _delegate = delegate;
     }    
     return self;
 }
