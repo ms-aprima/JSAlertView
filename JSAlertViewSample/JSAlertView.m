@@ -56,7 +56,7 @@
 @property (nonatomic, strong) NSMutableArray *alertViews;
 @property (nonatomic, strong) JSAlertView *visibleAlertView;
 @property (nonatomic, strong) UIView *alertContainerView;
-@property (nonatomic, assign) UIDeviceOrientation currentOrientation;
+@property (nonatomic, assign) UIInterfaceOrientation currentOrientation;
 @property (nonatomic, strong) UIWindow *alertOverlayWindow;
 @property (nonatomic, strong) UIWindow *originalKeyWindow;
 @property (nonatomic, strong) UIImageView *bgShadow;
@@ -76,7 +76,7 @@
 - (void)presentAlertView:(JSAlertView *)alertView;
 - (void)showNextAlertView;
 - (void)dismissWindow;
-- (void)updateViewForOrientation:(UIDeviceOrientation)orientation animated:(BOOL)animated;
+- (void)updateViewForOrientation:(UIInterfaceOrientation)orientation animated:(BOOL)animated;
 
 @end
 
@@ -118,24 +118,32 @@
 #pragma mark - Rotation
 
 - (void)didRotate:(NSNotification *)notification {
-    UIViewController *rootVC = _originalKeyWindow.rootViewController;
-    UIViewController *currentViewController = rootVC;
-    if (rootVC.presentedViewController) {
-        currentViewController = rootVC.presentedViewController;
+    [self matchReferenceOrientation:YES];
+}
+
+- (void)matchReferenceOrientation:(BOOL)animated {
+    UIWindow *referenceWindow = self.originalKeyWindow;
+    if (referenceWindow == nil) {
+        referenceWindow = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
     }
-    UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+    UIViewController *rootVC = referenceWindow.rootViewController;
+    UIViewController *referenceViewController = rootVC;
+    if (rootVC.presentedViewController) {
+        referenceViewController = rootVC.presentedViewController;
+    }
+    UIInterfaceOrientation orientation = [referenceViewController interfaceOrientation];
     
-    if ([currentViewController shouldAutorotateToInterfaceOrientation:orientation]) {    
-        [self updateViewForOrientation:orientation animated:YES];
+    if ([referenceViewController shouldAutorotateToInterfaceOrientation:orientation]) {
+        [self updateViewForOrientation:orientation animated:animated];
     }
 }
 
-- (void)updateViewForOrientation:(UIDeviceOrientation)orientation animated:(BOOL)animated {
+- (void)updateViewForOrientation:(UIInterfaceOrientation)orientation animated:(BOOL)animated {
     CGFloat duration = 0.0f;
     if (animated) {
         duration = 0.3;
-        if ( (UIDeviceOrientationIsLandscape(self.currentOrientation) && UIDeviceOrientationIsLandscape(orientation)) 
-            || (UIDeviceOrientationIsPortrait(orientation) && UIDeviceOrientationIsPortrait(self.currentOrientation)) ) {
+        if ( (UIInterfaceOrientationIsLandscape(self.currentOrientation) && UIInterfaceOrientationIsLandscape(orientation))
+            || (UIInterfaceOrientationIsPortrait(orientation) && UIInterfaceOrientationIsPortrait(self.currentOrientation)) ) {
             duration = 0.6;
         }
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
@@ -145,17 +153,17 @@
     self.currentOrientation = orientation;
     [UIView animateWithDuration:duration animations:^{
         switch (orientation) {
-            case UIDeviceOrientationPortrait:
+            case UIInterfaceOrientationPortrait:
                 _alertContainerView.transform = CGAffineTransformMakeRotation(0);
                 break;
-            case UIDeviceOrientationPortraitUpsideDown:
+            case UIInterfaceOrientationPortraitUpsideDown:
                 _alertContainerView.transform = CGAffineTransformMakeRotation(M_PI);
                 break;
-            case UIDeviceOrientationLandscapeLeft:
-                _alertContainerView.transform = CGAffineTransformMakeRotation(M_PI / 2);
-                break;
-            case UIDeviceOrientationLandscapeRight:
+            case UIInterfaceOrientationLandscapeLeft:
                 _alertContainerView.transform = CGAffineTransformMakeRotation(M_PI / -2);
+                break;
+            case UIInterfaceOrientationLandscapeRight:
+                _alertContainerView.transform = CGAffineTransformMakeRotation(M_PI / 2);
                 break; 
             default:
                 break;
@@ -309,17 +317,17 @@
     if (animated) {
         duration = 0.2f;
     }
-    __weak UIView *blockSafeAlertView = alertView;
+    __weak JSAlertView *blockSafeAlertView = alertView;
     [UIView animateWithDuration:duration delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^{
         blockSafeAlertView.alpha = 0.0f;
         blockSafeAlertView.transform = CGAffineTransformMakeScale(0.01, 0.01);
     } completion:^(BOOL finished) {
+        if ([blockSafeAlertView.delegate respondsToSelector:@selector(JS_alertView:didDismissWithButtonIndex:)]) {
+            [blockSafeAlertView.delegate JS_alertView:blockSafeAlertView didDismissWithButtonIndex:index];
+        }
         [blockSafeAlertView removeFromSuperview];
         [self.alertViews removeObject:blockSafeAlertView];
         self.visibleAlertView = nil;
-        if ([alertView.delegate respondsToSelector:@selector(JS_alertView:didDismissWithButtonIndex:)]) {
-            [alertView.delegate JS_alertView:alertView didDismissWithButtonIndex:index];
-        }
         [self showNextAlertView];
     }];
 }
@@ -329,7 +337,7 @@
     if (animated) {
         duration = 0.3f;
     }
-    __weak UIView *blockSafeAlertView = alertView;
+    __weak JSAlertView *blockSafeAlertView = alertView;
     [UIView animateWithDuration:duration delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^{
         blockSafeAlertView.alpha = 0.0f;
         CGRect frame = blockSafeAlertView.frame;
@@ -337,12 +345,12 @@
         blockSafeAlertView.frame = frame;
         blockSafeAlertView.transform = CGAffineTransformMakeRotation(M_PI / -3.5);
     } completion:^(BOOL finished) {
+        if ([alertView.delegate respondsToSelector:@selector(JS_alertView:didDismissWithButtonIndex:)]) {
+            [alertView.delegate JS_alertView:blockSafeAlertView didDismissWithButtonIndex:index];
+        }
         [blockSafeAlertView removeFromSuperview];
         [self.alertViews removeObject:blockSafeAlertView];
         self.visibleAlertView = nil;
-        if ([alertView.delegate respondsToSelector:@selector(JS_alertView:didDismissWithButtonIndex:)]) {
-            [alertView.delegate JS_alertView:alertView didDismissWithButtonIndex:index];
-        }
         [self showNextAlertView];
     }];
 }
@@ -352,17 +360,17 @@
     if (animated) {
         duration = 0.25f;
     }
-    __weak UIView *blockSafeAlertView = alertView;
+    __weak JSAlertView *blockSafeAlertView = alertView;
     [UIView animateWithDuration:duration delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
         blockSafeAlertView.alpha = 0.0f;
         blockSafeAlertView.transform = CGAffineTransformMakeScale(1.2, 1.2);
     } completion:^(BOOL finished) {
+        if ([alertView.delegate respondsToSelector:@selector(JS_alertView:didDismissWithButtonIndex:)]) {
+            [alertView.delegate JS_alertView:blockSafeAlertView didDismissWithButtonIndex:index];
+        }
         [blockSafeAlertView removeFromSuperview];
         [self.alertViews removeObject:blockSafeAlertView];
         self.visibleAlertView = nil;
-        if ([alertView.delegate respondsToSelector:@selector(JS_alertView:didDismissWithButtonIndex:)]) {
-            [alertView.delegate JS_alertView:alertView didDismissWithButtonIndex:index];
-        }
         [self showNextAlertView];
     }];
 }
@@ -372,15 +380,16 @@
     if (animated) {
         duration = 0.25f;
     }
+    __weak JSAlertView *blockSafeAlertView = alertView;
     [UIView animateWithDuration:duration delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        alertView.alpha = 0.0f;
+        blockSafeAlertView.alpha = 0.0f;
     } completion:^(BOOL finished) {
-        [alertView removeFromSuperview];
-        [self.alertViews removeObject:alertView];
-        self.visibleAlertView = nil;
         if ([alertView.delegate respondsToSelector:@selector(JS_alertView:didDismissWithButtonIndex:)]) {
-            [alertView.delegate JS_alertView:alertView didDismissWithButtonIndex:index];
+            [alertView.delegate JS_alertView:blockSafeAlertView didDismissWithButtonIndex:index];
         }
+        [blockSafeAlertView removeFromSuperview];
+        [self.alertViews removeObject:blockSafeAlertView];
+        self.visibleAlertView = nil;
         [self showNextAlertView];
     }];
 }
@@ -393,6 +402,7 @@
     _alertOverlayWindow.windowLevel = UIWindowLevelAlert;
     _alertOverlayWindow.backgroundColor = [UIColor clearColor];
     [self.alertOverlayWindow makeKeyAndVisible];
+    [self matchReferenceOrientation:NO];
 }
 
 - (void)prepareBackgroundShadow {
@@ -409,29 +419,7 @@
     self.alertContainerView = [[UIView alloc] initWithFrame:_alertOverlayWindow.bounds];
     _alertContainerView.clipsToBounds = NO;
     [_alertOverlayWindow addSubview:_alertContainerView];
-    _currentOrientation = [[UIDevice currentDevice] orientation];
-    UIViewController *rootVC = _originalKeyWindow.rootViewController;
-    UIViewController *currentViewController = rootVC;
-    if (currentViewController.presentedViewController) {
-        currentViewController = currentViewController.presentedViewController;
-    }
-    if (_currentOrientation == UIDeviceOrientationUnknown) {
-        _currentOrientation = [[UIApplication sharedApplication] statusBarOrientation];;
-    }
-    if ([currentViewController shouldAutorotateToInterfaceOrientation:_currentOrientation] == NO) {
-        if ([currentViewController shouldAutorotateToInterfaceOrientation:UIDeviceOrientationPortrait]) {
-            _currentOrientation = UIDeviceOrientationPortrait;
-        } else if ([currentViewController shouldAutorotateToInterfaceOrientation:UIDeviceOrientationPortraitUpsideDown]) {
-            _currentOrientation = UIDeviceOrientationPortraitUpsideDown;
-        } else if ([currentViewController shouldAutorotateToInterfaceOrientation:UIDeviceOrientationLandscapeLeft]) {
-            _currentOrientation = UIDeviceOrientationLandscapeLeft;
-        } else if ([currentViewController shouldAutorotateToInterfaceOrientation:UIDeviceOrientationLandscapeRight]) {
-            _currentOrientation = UIDeviceOrientationLandscapeRight;
-        } else {
-            _currentOrientation = UIDeviceOrientationPortrait;
-        }
-    }
-    [self updateViewForOrientation:_currentOrientation animated:NO];
+    [self matchReferenceOrientation:NO];
 }
 
 - (void)resetDefaultAppearance {
